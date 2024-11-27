@@ -1,0 +1,5 @@
+#root {
+  text-align: center;
+  overflow-y: auto; /* Permitir scroll vertical cuando sea necesario */
+  overflow-x: hidden;
+}
