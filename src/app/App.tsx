@@ -1,13 +1,12 @@
-import { Button } from '../components/ui/button';
-import { Label } from '../components/ui/label';
+import router from '@/routes/Routes';
+import { RouterProvider } from 'react-router-dom';
 import './App.css';
 
 function App() {
 
   return (
     <>
-     <Button>shadcn button</Button>
-     <Label>this is a label shadcn</Label>
+     <RouterProvider router={router} />
     </>
   )
 }
