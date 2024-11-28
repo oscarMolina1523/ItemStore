@@ -9,6 +9,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Search } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const HomePrincipalComponent: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -42,12 +43,12 @@ const HomePrincipalComponent: React.FC = () => {
     <div className="flex flex-col items-center h-[15rem] w-full relative">
       <div className="w-full h-4/5 bg-blue rounded-b-[3rem]"></div>
       <div className="flex flex-col absolute items-center justify-center w-5/7 gap-4 px-3 flex-grow translate-y-1/7 bottom-6">
-        <div className="w-full">
+        <Link to="/search" className="w-full">
           <Button className="w-full h-[3rem] flex flex-row justify-start items-center bg-gray text-dark-gray">
             <Search />
             Search...
           </Button>
-        </div>
+        </Link>
         <div>
           <Carousel className="bg-surface-neutral rounded-lg py-2 px-2 flex flex-col items-center shadow-lg">
             <CarouselContent>
