@@ -1,4 +1,4 @@
-import { Heart, House, ShoppingBag, User } from "lucide-react";
+import { Heart, House, Phone, User } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -12,7 +12,7 @@ const FooterComponent: React.FC = () => {
         <Heart className="h-6 w-6" />
       </Link>
       <div>
-        <ShoppingBag className="h-6 w-6" />
+        <Phone className="h-6 w-6" />
       </div>
       <Link to="/profile">
         <User className="h-6 w-6" />
