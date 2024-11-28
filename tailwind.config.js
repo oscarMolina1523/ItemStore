@@ -9,6 +9,8 @@ export default {
       'surface-neutral':'#FFFFFF',
       'black':'#3E4958',
       'gray':'#F7F8F9',
+      'red':'#FF0000',
+      'transparent':'#00000000',
       'dark-gray':'#D5DDE0',
       'green':'#00D455',
     },
