@@ -1,8 +1,15 @@
 import React from "react";
+import HomeCategoriesComponent from "./HomeCategories";
+import HomePrincipalComponent from "./HomePrincipal";
+import HomeProductsComponent from "./HomeProducts";
 
 const HomePage: React.FC = () => {
   return (
-    <div className="div">home page</div>
+    <div className="flex flex-col w-full flex-grow items-center">
+      <HomePrincipalComponent/>
+      <HomeCategoriesComponent/>
+      <HomeProductsComponent/>
+    </div>
   );
 }
 
