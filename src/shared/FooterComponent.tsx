@@ -11,9 +11,9 @@ const FooterComponent: React.FC = () => {
       <Link to="/wishList">
         <Heart className="h-6 w-6" />
       </Link>
-      <div>
+      <Link to="/contact">
         <Phone className="h-6 w-6" />
-      </div>
+      </Link>
       <Link to="/profile">
         <User className="h-6 w-6" />
       </Link>
