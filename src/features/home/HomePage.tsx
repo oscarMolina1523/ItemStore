@@ -1,4 +1,3 @@
-import FooterComponent from "@/shared/FooterComponent";
 import React from "react";
 import HomeCategoriesComponent from "./HomeCategories";
 import HomePrincipalComponent from "./HomePrincipal";
@@ -10,7 +9,6 @@ const HomePage: React.FC = () => {
       <HomePrincipalComponent/>
       <HomeCategoriesComponent/>
       <HomeProductsComponent/>
-      <FooterComponent/>
     </div>
   );
 }

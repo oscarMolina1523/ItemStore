@@ -48,7 +48,7 @@ const HomeProductsComponent: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center bg-dark-gray rounded-t-[2rem] w-full flex-grow mt-4">
+    <div className="flex flex-col items-center bg-dark-gray rounded-t-[1rem] w-full flex-grow mt-8 gap-6">
       <div className="flex flex-row w-full items-center justify-between px-4 py-2">
         <Label className="text-black font-semibold text-[1.2rem]">Nuevos Productos</Label>
         <Button className="bg-blue text-surface-neutral">Ver todo</Button>

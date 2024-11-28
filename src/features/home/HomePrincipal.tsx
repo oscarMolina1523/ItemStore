@@ -39,7 +39,7 @@ const HomePrincipalComponent: React.FC = () => {
   }, [items.length]);
 
   return (
-    <div className="flex flex-col items-center h-[19rem] w-full relative">
+    <div className="flex flex-col items-center h-[15rem] w-full relative">
       <div className="w-full h-4/5 bg-blue rounded-b-[3rem]"></div>
       <div className="flex flex-col absolute items-center justify-center w-5/7 gap-4 px-3 flex-grow translate-y-1/7 bottom-6">
         <div className="w-full">
@@ -77,7 +77,7 @@ const HomePrincipalComponent: React.FC = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="flex justify-center gap-2 absolute bottom-0 translate-y-3/4 py-4">
+            <div className="hidden justify-center gap-2 absolute bottom-0 translate-y-3/4 py-4">
               <CarouselPrevious
                 onClick={() =>
                   setCurrentIndex(
