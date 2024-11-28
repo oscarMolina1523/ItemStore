@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const FooterComponent: React.FC = () => {
   return (
-    <div className="flex flex-row items-center h-[4rem] w-full justify-around">
+    <div className="flex flex-row items-center h-[4rem] w-full justify-around mt-auto py-4">
       <Link to="/home">
         <House className="h-6 w-6" />
       </Link>
