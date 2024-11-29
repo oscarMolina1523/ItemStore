@@ -1,10 +1,17 @@
+import CreateProductComponent from "@/components/itemStoreComponents/CreateProduct";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { ArrowLeft } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const ProfilePage: React.FC = () => {
+  const [newProduct, setNewProduct]= useState(false);
+
+  const handleNewProductClick=()=>{
+    setNewProduct(!newProduct);
+  }
+
   return (
     <div className="flex flex-col items-center gap-4 px-4">
       <div className="flex flex-col items-center w-full gap-4 ">
@@ -29,9 +36,16 @@ const ProfilePage: React.FC = () => {
           <Label className="text-[1.2rem] tracking-wide font-semibold text-black">Detalles de la cuenta</Label>
         </div>
         <div className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start">
+          <Label className="text-[1.2rem] tracking-wide font-semibold text-black">Administrar Productos</Label>
+        </div>
+        <div onClick={handleNewProductClick} className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start">
+          <Label className="text-[1.2rem] tracking-wide font-semibold text-black">Nuevo Producto</Label>
+        </div>
+        <div className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start">
           <Label className="text-[1.2rem] tracking-wide font-semibold text-black">Cerrar Sesion</Label>
         </div>
       </div>
+      <CreateProductComponent show={newProduct} onClose={handleNewProductClick}/>
     </div>
   );
 }

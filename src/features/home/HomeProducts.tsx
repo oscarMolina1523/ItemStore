@@ -3,10 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Label } from "@/components/ui/label";
+import ProductDetailComponent from "@/shared/ProductDetailComponent";
 import { Heart } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 
 const HomeProductsComponent: React.FC = () => {
+  const [selectedProd, setSelectedProd] = useState(false);
+
+  const handleSelectedProduct = () => {
+    setSelectedProd(!selectedProd);
+  }
 
   const items = [
     {
@@ -55,7 +61,7 @@ const HomeProductsComponent: React.FC = () => {
       </div>
       <div className="px-2">
         <Carousel className="w-full max-w-sm">
-          <CarouselContent className="ml-2 mb-4">
+          <CarouselContent onClick={handleSelectedProduct} className="ml-2 mb-4">
             {items.map((item, index) => (
               <CarouselItem key={index} className="pl-1 basis-[11rem]">
                 <Card>
@@ -74,7 +80,7 @@ const HomeProductsComponent: React.FC = () => {
                     </div>
                     <div className="flex flex-row items-center justify-between">
                       <span className="text-[1.2rem] font-extrabold tracking-wide text-left">{item.price}</span>
-                      <Heart className="h-6 w-6"/>
+                      <Heart className="h-6 w-6" />
                     </div>
                   </CardContent>
                 </Card>
@@ -83,6 +89,7 @@ const HomeProductsComponent: React.FC = () => {
           </CarouselContent>
         </Carousel>
       </div>
+      <ProductDetailComponent show={selectedProd} onClose={handleSelectedProduct}/>
     </div>
   );
 }
