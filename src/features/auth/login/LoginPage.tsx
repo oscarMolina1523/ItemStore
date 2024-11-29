@@ -1,11 +1,32 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { AuthService } from "@/services/AuthService";
 import { ArrowLeft } from "lucide-react";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
+
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
+  const [error, setError] = useState<boolean>(false);
+
+  const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    try {
+      const response = await AuthService.LoginService(inputEmail, inputPassword);
+      const token= await response.getIdToken();
+      const loginTime = new Date().getTime();
+      localStorage.setItem("authToken", token);
+      localStorage.setItem("loginTime", loginTime.toString());
+      navigate("/home");
+    } catch {
+      setError(true);
+    }
+  }
+
   return (
     <div className="flex flex-col items-center gap-4 px-4 h-screen">
       <div className="flex flex-col items-center w-full gap-4 ">
@@ -18,20 +39,24 @@ const LoginPage: React.FC = () => {
         Por favor complete el correo electrónico y la contraseña para iniciar sesión en su
         Cuenta de aplicación Shopy.
       </Label>
+      {error && (<Label className="text-red">Email o contraseña incorrecta</Label>)}
       <div className="flex flex-col gap-4 items-center w-full">
         <div className="flex flex-col gap-1 text-left w-full">
           <Label className="text-[1.2rem] tracking-wide text-black">E-mail</Label>
-          <Input className="h-[3rem]" placeholder="ej. jorge@gmail.com"/>
+          <Input value={inputEmail} onChange={(e)=>setInputEmail(e.target.value)}
+          className="h-[3rem]" placeholder="ej. jorge@gmail.com"/>
         </div>
         <div className="flex flex-col gap-1 text-left w-full">
           <Label className="text-[1.2rem] tracking-wide text-black">Contraseña</Label>
-          <Input type="password" className="h-[3rem]" placeholder="ej. ghHJ5V!h"/>
+          <Input value={inputPassword} onChange={(e)=>setInputPassword(e.target.value)}
+          type="password" className="h-[3rem]" placeholder="ej. ghHJ5V!h"/>
         </div>
         <div className="flex flex-col gap-1 text-right w-full">
           <Label className=" tracking-wide text-red">Olvido su contraseña?</Label>
         </div>
         <div className="flex flex-col gap-1 w-full">
-          <Button className="bg-blue h-[3rem] text-[1.2rem] tracking-wide font-semibold text-surface-neutral hover:bg-surface-neutral hover:text-blue hover:border hover:border-blue">Continuar</Button>
+          <Button onClick={handleLogin}
+          className="bg-blue h-[3rem] text-[1.2rem] tracking-wide font-semibold text-surface-neutral hover:bg-surface-neutral hover:text-blue hover:border hover:border-blue">Continuar</Button>
         </div>
         <div className="flex flex-row gap-1 w-full items-center">
           <div className="w-1/2 h-[1px] bg-black"></div>
