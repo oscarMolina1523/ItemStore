@@ -45,6 +45,7 @@ const CreateProductComponent: React.FC<CreateProductComponentProps> = ({
         precio,
         descripcion,
         imagen: uploadedImageUrl,
+        createdAt: new Date().toISOString(),
       };
 
       await ProductService.createProduct(newProduct);
@@ -130,7 +131,7 @@ const CreateProductComponent: React.FC<CreateProductComponentProps> = ({
               onChange={handleFileChange}
             />
             <Button
-              className="bg-blue text-surface-neutral font-semibold hover:bg-surface-neutral hover:text-dark-blue"
+              className="bg-blue text-surface-neutral font-semibold hover:bg-surface-neutral hover:text-blue"
               onClick={() => document.getElementById("fileInput")?.click()}
             >
               {imageFile ? `Archivo: ${imageFile.name}` : "Subir Imagen"}
