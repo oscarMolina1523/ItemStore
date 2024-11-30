@@ -9,12 +9,12 @@ import { Heart } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const HomeProductsComponent: React.FC = () => {
-  const [selectedProd, setSelectedProd] = useState(false);
+  const [selectedProd, setSelectedProd] = useState<Producto | null>(null);
   const [items, setItems] = useState<Producto[]>([]);
 
-  const handleSelectedProduct = () => {
-    setSelectedProd(!selectedProd);
-  }
+  const handleSelectedProduct = (product: Producto | null) => {
+    setSelectedProd(product); 
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -42,10 +42,10 @@ const HomeProductsComponent: React.FC = () => {
       </div>
       <div className="px-2">
         <Carousel className="w-full max-w-sm">
-          <CarouselContent onClick={handleSelectedProduct} className="ml-2 mb-4">
+          <CarouselContent className="ml-2 mb-4">
             {sortedItems.slice(0).map((item, index) => (
               <CarouselItem key={index} className="pl-1 basis-[11rem]">
-                <Card>
+                <Card onClick={() => handleSelectedProduct(item)}>
                   <CardContent className="flex flex-col flex-grow aspect-square p-1 flex-grow">
                     <div className="w-full h-3/4 relative">
                       <img
@@ -78,7 +78,13 @@ const HomeProductsComponent: React.FC = () => {
           </CarouselContent>
         </Carousel>
       </div>
-      <ProductDetailComponent show={selectedProd} onClose={handleSelectedProduct} />
+      {selectedProd && ( 
+        <ProductDetailComponent
+          product={selectedProd}
+          show={!!selectedProd}
+          onClose={() => handleSelectedProduct(null)} 
+        />
+      )}
     </div>
   );
 }
