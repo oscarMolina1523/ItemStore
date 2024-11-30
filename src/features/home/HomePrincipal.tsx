@@ -30,23 +30,9 @@ const HomePrincipalComponent: React.FC = () => {
     fetchProducts();
   }, [setItems]);
 
-  // const items = [
-  //   {
-  //     image: "https://images-cdn.ubuy.ae/6567e25a06139139127520a7-bxyjdj-men-39-s-running-shoes-walking.jpg",
-  //     label: "Popular",
-  //     title: "Air Max 2090",
-  //   },
-  //   {
-  //     image: "https://olympicsa.co.za/wp-content/uploads/2024/02/01.Olympic-Bounce-Men-Blue-Feature-image-Side-A-1080px-x-1080px-jpg-600x600.webp",
-  //     label: "Popular",
-  //     title: "Air Max 2090",
-  //   },
-  //   {
-  //     image: "https://xeroshoes.com/wp-content/uploads/2024/06/DLLM-WHTE_Dillon-Leather_White_AngleR_0056_WEB-385x250.jpg",
-  //     label: "Popular",
-  //     title: "Air Max 2090",
-  //   },
-  // ];
+  const sortedItems = [...items].sort((a, b) => {
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -69,7 +55,7 @@ const HomePrincipalComponent: React.FC = () => {
         <div className="w-full">
           <Carousel className="bg-surface-neutral rounded-lg py-2 px-2 flex flex-col items-center shadow-lg">
             <CarouselContent className="w-full">
-              {items.map((item, index) => (
+              {sortedItems.slice(0).map((item, index) => (
                 <CarouselItem
                   key={index}
                   className={`flex flex-row w-full ${currentIndex === index ? "flex" : "hidden"}`}
