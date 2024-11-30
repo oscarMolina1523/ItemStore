@@ -5,7 +5,7 @@ import { FirebaseAppProvider } from "reactfire";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDvWYrDKD-JDjBo1hURl-G7vdhuy1P6Pmc",
-  projectId: "fitem-store-4a2ea",
+  projectId: "item-store-4a2ea",
 };
 
 const app = initializeApp(firebaseConfig);
