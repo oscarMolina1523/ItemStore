@@ -13,7 +13,6 @@ export interface Producto {
 };
 
 export interface Usuario {
-  id: string;
   nombre: string;
   rol: string;
   descripcion: string;
