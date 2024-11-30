@@ -37,6 +37,7 @@ const RegisterPage: React.FC = () => {
       localStorage.setItem("authToken", token);
 
       const newUser: Usuario = {
+        id:"",
         nombre: '@' + username,
         foto: 'https://img.freepik.com/premium-vector/avatar-profile-icon_188544-4755.jpg',
         descripcion: '',
@@ -44,7 +45,7 @@ const RegisterPage: React.FC = () => {
         listaDeseos: [],
       }
 
-      await UserService.createUser(userId.uid ,newUser);
+      await UserService.createUser(newUser);
 
       const loginTime = new Date().getTime();
       localStorage.setItem("loginTime", loginTime.toString());
