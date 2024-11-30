@@ -20,7 +20,7 @@ const CreateProductComponent: React.FC<CreateProductComponentProps> = ({
 }) => {
   const { uploadImage, error } = useImageUpload(); 
   const [titulo, setTitulo] = useState<string>("");
-  const [precio, setPrecio] = useState<number>();
+  const [precio, setPrecio] = useState<string>("0");
   const [descripcion, setDescripcion] = useState<string>("");
   const [categorias, setCategorias] = useState<string[]>([]);
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -48,6 +48,11 @@ const CreateProductComponent: React.FC<CreateProductComponentProps> = ({
       };
 
       await ProductService.createProduct(newProduct);
+      setTitulo("");
+      setCategorias([]);
+      setPrecio("0");
+      setDescripcion("");
+      setImageFile(null);
       alert("Producto creado exitosamente");
       onClose();
     } catch (error) {
@@ -95,11 +100,10 @@ const CreateProductComponent: React.FC<CreateProductComponentProps> = ({
           </Label>
           <Input
             id="precio"
-            type="number"
             className="bg-dark-ocean-blue border text-black"
             placeholder="Precio del producto..."
             value={precio}
-            onChange={(e) => setPrecio(Number(e.target.value))}
+            onChange={(e) => setPrecio(e.target.value)}
           />
         </div>
         <div className="flex flex-col px-4 py-4 gap-2">
