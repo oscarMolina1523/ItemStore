@@ -1,12 +1,12 @@
 import { DB_NAMES } from "@/models/db_models";
 import { Usuario } from "@/models/EntitiesModel";
 import {
-  addDoc,
   collection,
   deleteDoc,
   doc,
   getDoc,
   getDocs,
+  setDoc,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "./firebase";
@@ -15,14 +15,12 @@ export const UserService = {
   /**
    * Crear un nuevo usuario
    */
-  async createUser(usuario: Omit<Usuario, 'id'>): Promise<Usuario> {
+  async createUser(usuario: Usuario): Promise<Usuario> {
     const usersRef = collection(db, DB_NAMES.USERS);
-    const docRef = await addDoc(usersRef, { ...usuario });
+    const docRef = doc(usersRef, usuario.id); // Asegúrate de que `usuario.id` ya contiene el ID de autenticación
+    await setDoc(docRef, { ...usuario }); // setDoc crea o sobrescribe el documento directamente
 
-    // Asignar el ID generado al modelo del usuario
-    const newUser: Usuario = { ...usuario, id: docRef.id };
-    await updateDoc(docRef, { id: docRef.id });
-    return newUser;
+    return usuario;
   },
 
   /**

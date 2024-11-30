@@ -37,7 +37,7 @@ const RegisterPage: React.FC = () => {
       localStorage.setItem("authToken", token);
 
       const newUser: Usuario = {
-        id:"",
+        id: userId.uid,
         nombre: '@' + username,
         foto: 'https://img.freepik.com/premium-vector/avatar-profile-icon_188544-4755.jpg',
         descripcion: '',
