@@ -45,6 +45,7 @@ const CreateProductComponent: React.FC<CreateProductComponentProps> = ({
         precio,
         descripcion,
         imagen: uploadedImageUrl,
+        createdAt: new Date().toISOString(),
       };
 
       await ProductService.createProduct(newProduct);
