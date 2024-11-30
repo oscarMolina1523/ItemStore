@@ -2,7 +2,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { useAuthContext } from "@/context/AuthContext";
 import { Producto } from "@/models/EntitiesModel";
+import { UserService } from "@/services/UserService";
 import { Heart, X } from "lucide-react";
 import React from "react";
 
@@ -17,6 +19,15 @@ const ProductDetailComponent: React.FC<ProductDetailComponentProps> = ({
   onClose,
   product
 }) => {
+  const {user}=useAuthContext();
+
+  if(!user) return;
+
+  const handleAddWishList=async()=>{
+    await UserService.addProductToWishlist(user.uid,product.id);
+    alert("producto agregado a la lista de deseos");
+  }
+
   if (!show) return null;
 
   return (
@@ -52,7 +63,7 @@ const ProductDetailComponent: React.FC<ProductDetailComponentProps> = ({
           </div>
           <br />
           <div>
-            <Button><Heart />Agregar a lista de deseos</Button>
+            <Button onClick={handleAddWishList} className="bg-red text-surface-neutral"><Heart />Agregar a lista de deseos</Button>
           </div>
         </CardContent>
       </Card>
