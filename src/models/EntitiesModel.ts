@@ -10,6 +10,7 @@ export interface Producto {
   precio: string;
   descripcion: string;
   imagen: string;
+  createdAt: string;
 };
 
 export interface Usuario {
