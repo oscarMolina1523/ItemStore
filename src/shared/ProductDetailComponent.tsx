@@ -6,7 +6,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { Producto } from "@/models/EntitiesModel";
 import { UserService } from "@/services/UserService";
 import { Heart, X } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface ProductDetailComponentProps {
   show: boolean;
@@ -17,16 +17,40 @@ interface ProductDetailComponentProps {
 const ProductDetailComponent: React.FC<ProductDetailComponentProps> = ({
   show,
   onClose,
-  product
+  product,
 }) => {
-  const {user}=useAuthContext();
+  const { user } = useAuthContext();
+  const [isInWishlist, setIsInWishlist] = useState(false);
 
-  if(!user) return;
+  useEffect(() => {
+    if (!user) return;
+    const checkWishlist = async () => {
+      const usuario = await UserService.getUser(user.uid);
+      if (usuario && usuario.listaDeseos.includes(product.id)) {
+        setIsInWishlist(true);
+      } else {
+        setIsInWishlist(false);
+      }
+    };
+    checkWishlist();
+  }, [user, product.id]);
 
-  const handleAddWishList=async()=>{
-    await UserService.addProductToWishlist(user.uid,product.id);
-    alert("producto agregado a la lista de deseos");
-  }
+  const handleToggleWishList = async () => {
+    try {
+      if (!user) return ;
+      
+      if (isInWishlist) {
+        await UserService.removeProductFromWishlist(user.uid, product.id);
+        alert("Producto eliminado de la lista de deseos");
+      } else {
+        await UserService.addProductToWishlist(user.uid, product.id);
+        alert("Producto agregado a la lista de deseos");
+      }
+      setIsInWishlist(!isInWishlist); // Cambiar el estado
+    } catch (error) {
+      console.error("Error al actualizar la lista de deseos:", error);
+    }
+  };
 
   if (!show) return null;
 
@@ -41,14 +65,27 @@ const ProductDetailComponent: React.FC<ProductDetailComponentProps> = ({
         </CardDescription>
         <CardContent>
           <div className="flex w-full h-1/2">
-            <img className="object-cover w-full h-full"
+            <img
+              className="object-cover w-full h-full"
               src={product.imagen}
-              alt="profile-img" />
+              alt="profile-img"
+            />
           </div>
           <div className="flex flex-col gap-2 items-start text-left">
-            <p><strong className="font-semibold tracking-wide">Nombre: </strong>{product.titulo}</p>
-            <p><strong className="font-semibold tracking-wide">Descripcion: </strong>{product.descripcion}</p>
-            <p><strong className="font-semibold tracking-wide">Precio: C$</strong>{product.precio}</p>
+            <p>
+              <strong className="font-semibold tracking-wide">Nombre: </strong>
+              {product.titulo}
+            </p>
+            <p>
+              <strong className="font-semibold tracking-wide">
+                Descripción:{" "}
+              </strong>
+              {product.descripcion}
+            </p>
+            <p>
+              <strong className="font-semibold tracking-wide">Precio: C$</strong>
+              {product.precio}
+            </p>
           </div>
           <br />
           <div className="flex flex-wrap gap-2">
@@ -63,12 +100,20 @@ const ProductDetailComponent: React.FC<ProductDetailComponentProps> = ({
           </div>
           <br />
           <div>
-            <Button onClick={handleAddWishList} className="bg-red text-surface-neutral"><Heart />Agregar a lista de deseos</Button>
+            <Button
+              onClick={handleToggleWishList}
+              className="bg-red text-surface-neutral"
+            >
+              <Heart />
+              {isInWishlist
+                ? "Eliminar de lista de deseos"
+                : "Agregar a lista de deseos"}
+            </Button>
           </div>
         </CardContent>
       </Card>
     </div>
   );
-}
+};
 
 export default ProductDetailComponent;
