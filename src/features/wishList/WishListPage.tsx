@@ -6,36 +6,46 @@ import { Producto, Usuario } from "@/models/EntitiesModel";
 import { ProductService } from "@/services/ProductService";
 import { UserService } from "@/services/UserService";
 import { ArrowLeft, Search, Trash } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const WishListPage: React.FC = () => {
   const { user } = useAuthContext();
   const [wishListProducts, setWishListProducts] = useState<Producto[]>([]);
 
-  useEffect(() => {
-    const fetchWishList = async () => {
-      
-      try {
-        if (!user) return;
-        const usuario: Usuario |null = await UserService.getUser(user.uid);
 
-        if (usuario && usuario.listaDeseos) {
-          const allProducts: Producto[] = await ProductService.getProducts();
+  const fetchWishList = useCallback(async () => { 
+    try {
+      if (!user) return;
+      const usuario: Usuario |null = await UserService.getUser(user.uid);
 
-          const filteredProducts = allProducts.filter((product) =>
-            usuario.listaDeseos.includes(product.id)
-          );
+      if (usuario && usuario.listaDeseos) {
+        const allProducts: Producto[] = await ProductService.getProducts();
 
-          setWishListProducts(filteredProducts);
-        }
-      } catch (error) {
-        console.error("Error al obtener la lista de deseos:", error);
+        const filteredProducts = allProducts.filter((product) =>
+          usuario.listaDeseos.includes(product.id)
+        );
+
+        setWishListProducts(filteredProducts);
       }
-    };
-
-    fetchWishList();
+    } catch (error) {
+      console.error("Error al obtener la lista de deseos:", error);
+    }
   }, [user]);
+
+  useEffect(() => {
+    fetchWishList();
+  }, [user, fetchWishList]);
+
+  const handleRemoveProd=async(productId:string)=>{
+    try{
+      if(!user) return;
+      await UserService.removeProductFromWishlist(user.uid, productId);
+      fetchWishList();
+    }catch{
+      console.log("error removing this product")
+    }
+  }
 
   return (
     <div className="flex flex-col items-center w-full px-4">
@@ -79,7 +89,7 @@ const WishListPage: React.FC = () => {
                     </div> */}
                     <Label className="text-black font-extrabold text-[1.2rem]">C${item.precio}</Label>
                     <div className="w-full flex justify-end">
-                      <Trash className="h-6 w-6 text-red" />
+                      <Trash  onClick={()=>handleRemoveProd(item.id)} className="h-6 w-6 text-red" />
                     </div>
                   </div>
                 </CardContent>
