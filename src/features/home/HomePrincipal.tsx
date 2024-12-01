@@ -7,40 +7,42 @@ import {
   CarouselPrevious
 } from "@/components/ui/carousel";
 import { Label } from "@/components/ui/label";
-import { Producto } from "@/models/EntitiesModel";
-import { ProductService } from "@/services/ProductService";
+import { useProductContext } from "@/context/ProductContext";
+// import { Producto } from "@/models/EntitiesModel";
+// import { ProductService } from "@/services/ProductService";
 import { Search } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const HomePrincipalComponent: React.FC = () => {
+  const {products} = useProductContext();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [items, setItems] = useState<Producto[]>([]);
+  // const [products, setItems] = useState<Producto[]>([]);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const prod = await ProductService.getProducts();
-        setItems(prod);
-      } catch (error) {
-        console.log("Failed to obtain products", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const prod = await ProductService.getProducts();
+  //       setItems(prod);
+  //     } catch (error) {
+  //       console.log("Failed to obtain products", error);
+  //     }
+  //   };
 
-    fetchProducts();
-  }, [setItems]);
+  //   fetchProducts();
+  // }, [setItems]);
 
-  const sortedItems = [...items].sort((a, b) => {
+  const sortedItems = [...products].sort((a, b) => {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % products.length);
     }, 3000);
 
     return () => clearInterval(interval); // Limpieza para evitar fugas de memoria
-  }, [items.length]);
+  }, [products.length]);
 
   return (
     <div className="flex flex-col items-center h-[20rem] w-full relative">
@@ -81,13 +83,13 @@ const HomePrincipalComponent: React.FC = () => {
             <div className="hidden justify-center gap-2 absolute bottom-0 translate-y-3/4 py-4">
               <CarouselPrevious
                 onClick={() =>
-                  setCurrentIndex((prevIndex) => (prevIndex - 1 + items.length) % items.length)
+                  setCurrentIndex((prevIndex) => (prevIndex - 1 + products.length) % products.length)
                 }
                 className="border border-transparent bg-transparent"
               />
               <CarouselNext
                 onClick={() =>
-                  setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length)
+                  setCurrentIndex((prevIndex) => (prevIndex + 1) % products.length)
                 }
                 className="border border-transparent bg-transparent"
               />
