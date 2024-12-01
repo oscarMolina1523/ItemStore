@@ -20,13 +20,18 @@ const WishListPage: React.FC = () => {
       const usuario: Usuario |null = await UserService.getUser(user.uid);
 
       if (usuario && usuario.listaDeseos) {
-        const allProducts: Producto[] = await ProductService.getProducts();
-
-        const filteredProducts = allProducts.filter((product) =>
-          usuario.listaDeseos.includes(product.id)
+        const productsPromises = usuario.listaDeseos.map((productId) =>
+          ProductService.getProduct(productId)
         );
-
-        setWishListProducts(filteredProducts);
+  
+        const products = await Promise.all(productsPromises);
+  
+        // Filtrar productos nulos (caso de IDs no válidos o productos inexistentes).
+        const validProducts = products.filter(
+          (product): product is Producto => product !== null
+        );
+  
+        setWishListProducts(validProducts);
       }
     } catch (error) {
       console.error("Error al obtener la lista de deseos:", error);
