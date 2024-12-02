@@ -13,7 +13,9 @@ import { useSingleProductContext } from "@/context/SingleProductContext";
 import { Producto } from "@/models/EntitiesModel";
 import ProductComponent from "@/shared/ProductComponent";
 import ProductDetailComponent from "@/shared/ProductDetailComponent";
+import { ArrowLeft } from "lucide-react";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ProductListPage: React.FC = () => {
   const { fetchSingleProduct } = useSingleProductContext();
@@ -62,8 +64,13 @@ const ProductListPage: React.FC = () => {
 
   return (
     <div className="w-full flex flex-col gap-4 bg-surface-neutral dark:bg-dark-ocean-blue items-center px-2 py-6">
-      {/* Buscador interactivo */}
-      <Command className="rounded-lg border w-full md:w-3/4 bg-surface-neutral text-dark-ocean-blue dark:bg-dark-ocean-blue dark:text-surface-neutral">
+      <div className="flex flex-col items-center w-full gap-4 ">
+        <Link to="/home" className="flex flex-row gap-4 items-center w-full fixed top-0 left-0 right-0 z-20 h-[4rem] bg-surface-neutral mb-6">
+          <ArrowLeft className="h-8 w-8" />
+          <Label className="text-[1.5rem] text-black font-semibold tracking-wide">Todos los productos</Label>
+        </Link>
+      </div>
+      <Command className="rounded-lg mt-[3rem] border w-full md:w-3/4 bg-surface-neutral text-dark-ocean-blue dark:bg-dark-ocean-blue dark:text-surface-neutral">
         <CommandInput
           className="bg-surface-neutral text-dark-ocean-blue dark:bg-dark-ocean-blue dark:text-surface-neutral"
           placeholder="Buscar por categorias..."
