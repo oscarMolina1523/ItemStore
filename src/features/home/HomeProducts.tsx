@@ -2,16 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Label } from "@/components/ui/label";
+import { useProductContext } from "@/context/ProductContext";
 import { Producto } from "@/models/EntitiesModel";
-import { ProductService } from "@/services/ProductService";
 import ProductDetailComponent from "@/shared/ProductDetailComponent";
 import { Heart } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const HomeProductsComponent: React.FC = () => {
+  const {products} = useProductContext();
   const [selectedProd, setSelectedProd] = useState<Producto | null>(null);
-  const [items, setItems] = useState<Producto[]>([]);
+  // const [products, setItems] = useState<Producto[]>([]);
   const navigate = useNavigate();
 
   const handleSelectedProduct = (product: Producto | null) => {
@@ -22,21 +23,21 @@ const HomeProductsComponent: React.FC = () => {
     navigate("/productList");
   };
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const prod = await ProductService.getProducts();
-        setItems(prod);
-      } catch (error) {
-        console.log("Failed to obtain products", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const prod = await ProductService.getProducts();
+  //       setItems(prod);
+  //     } catch (error) {
+  //       console.log("Failed to obtain products", error);
+  //     }
+  //   };
 
-    fetchProducts();
-  }, [setItems]);
+  //   fetchProducts();
+  // }, [setItems]);
 
 
-  const sortedItems = [...items].sort((a, b) => {
+  const sortedItems = [...products].sort((a, b) => {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 
