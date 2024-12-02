@@ -2,35 +2,42 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Label } from "@/components/ui/label";
+import { useProductContext } from "@/context/ProductContext";
 import { Producto } from "@/models/EntitiesModel";
-import { ProductService } from "@/services/ProductService";
 import ProductDetailComponent from "@/shared/ProductDetailComponent";
 import { Heart } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HomeProductsComponent: React.FC = () => {
+  const {products} = useProductContext();
   const [selectedProd, setSelectedProd] = useState<Producto | null>(null);
-  const [items, setItems] = useState<Producto[]>([]);
+  // const [products, setItems] = useState<Producto[]>([]);
+  const navigate = useNavigate();
 
   const handleSelectedProduct = (product: Producto | null) => {
     setSelectedProd(product); 
   };
+  
+  const handleRedirectProductList=()=>{
+    navigate("/productList");
+  };
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const prod = await ProductService.getProducts();
-        setItems(prod);
-      } catch (error) {
-        console.log("Failed to obtain products", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const prod = await ProductService.getProducts();
+  //       setItems(prod);
+  //     } catch (error) {
+  //       console.log("Failed to obtain products", error);
+  //     }
+  //   };
 
-    fetchProducts();
-  }, [setItems]);
+  //   fetchProducts();
+  // }, [setItems]);
 
 
-  const sortedItems = [...items].sort((a, b) => {
+  const sortedItems = [...products].sort((a, b) => {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 
@@ -38,7 +45,7 @@ const HomeProductsComponent: React.FC = () => {
     <div className="flex flex-col items-center bg-dark-gray rounded-t-[1rem] w-full flex-grow mt-8 gap-6">
       <div className="flex flex-row w-full items-center justify-between px-4 py-2">
         <Label className="text-black font-semibold text-[1.2rem]">Nuevos Productos</Label>
-        <Button className="bg-blue text-surface-neutral">Ver todo</Button>
+        <Button onClick={handleRedirectProductList} className="bg-blue text-surface-neutral">Ver todo</Button>
       </div>
       <div className="px-2">
         <Carousel className="w-full max-w-sm">

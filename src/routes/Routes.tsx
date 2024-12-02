@@ -5,6 +5,7 @@ import ContactPage from "@/features/contact/ContactPage";
 import ErrorPage from "@/features/error/Error";
 import HomePage from "@/features/home/HomePage";
 import MainLayout from "@/features/layouts/MainLayout";
+import ProductsListPage from "@/features/productsList/ProductsListPage";
 import ProfilePage from "@/features/profile/ProfilePage";
 import SearchPage from "@/features/search/SearchPage";
 import WishListPage from "@/features/wishList/WishListPage";
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path:"/wishList",
         element: <WishListPage/>
+      },
+      {
+        path:"/productList",
+        element: <ProductsListPage/>
       },
       {
         path:"/contact",
