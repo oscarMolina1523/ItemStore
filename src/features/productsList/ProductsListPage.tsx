@@ -9,11 +9,15 @@ import {
 } from "@/components/ui/command";
 import { Label } from "@/components/ui/label";
 import { useProductContext } from "@/context/ProductContext";
+import { useSingleProductContext } from "@/context/SingleProductContext";
+import { Producto } from "@/models/EntitiesModel";
 import ProductComponent from "@/shared/ProductComponent";
+import ProductDetailComponent from "@/shared/ProductDetailComponent";
 import React, { useState } from "react";
 
 const ProductListPage: React.FC = () => {
-  const { products, loadingProd, errorProd} = useProductContext();
+  const { fetchSingleProduct } = useSingleProductContext();
+  const { products, loadingProd, errorProd } = useProductContext();
   const [visibleProducts, setVisibleProducts] = useState<number>(12);
   const [search, setSearch] = useState<string>(""); // Texto de búsqueda
   const [filteredCategories, setFilteredCategories] = useState<string[]>([]); // Categorías filtradas dinámicamente
@@ -33,25 +37,28 @@ const ProductListPage: React.FC = () => {
     setSearch(value);
 
     if (value.trim() === "") {
-      setFilteredCategories([]); 
+      setFilteredCategories([]);
       return;
     }
 
     const categories = products
-    .flatMap((product) => product.categorias.map((cat) => cat.trim()))
-    .filter((category, index, self) => self.indexOf(category) === index) 
-    .filter((category) => category.toLowerCase().includes(value.toLowerCase())); 
+      .flatMap((product) => product.categorias.map((cat) => cat.trim()))
+      .filter((category, index, self) => self.indexOf(category) === index)
+      .filter((category) => category.toLowerCase().includes(value.toLowerCase()));
 
-  setFilteredCategories(categories);
+    setFilteredCategories(categories);
   };
 
   const handleLoadMore = () => {
     setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 12);
   };
 
-  const handleClick=()=>{
-    console.log("clicked in product list");
-  }
+  const [selectedProd, setSelectedProd] = useState<Producto | undefined>();
+
+  const handleSelectedProduct = (product?: Producto) => {
+    setSelectedProd(product);
+    if (product) fetchSingleProduct(product.id);
+  };
 
   return (
     <div className="w-full flex flex-col gap-4 bg-surface-neutral dark:bg-dark-ocean-blue items-center px-2 py-6">
@@ -71,7 +78,7 @@ const ProductListPage: React.FC = () => {
               {filteredCategories.map((category, index) => (
                 <CommandItem
                   key={index}
-                  onSelect={() => setSearch(category)} 
+                  onSelect={() => setSearch(category)}
                 >
                   {category}
                 </CommandItem>
@@ -97,7 +104,7 @@ const ProductListPage: React.FC = () => {
                 category={product.categorias}
                 title={product.titulo}
                 imageUrl={product.imagen}
-                onClick={handleClick}
+                onClick={() => handleSelectedProduct(product)}
               />
             ))
           ) : (
@@ -113,6 +120,12 @@ const ProductListPage: React.FC = () => {
           Ver más
         </Button>
       </div>
+      {selectedProd && (
+        <ProductDetailComponent
+          show={!!selectedProd}
+          onClose={() => handleSelectedProduct(undefined)}
+        />
+      )}
     </div>
   );
 };
