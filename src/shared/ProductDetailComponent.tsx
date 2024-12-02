@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useAuthContext } from "@/context/AuthContext";
-import { Producto } from "@/models/EntitiesModel";
+import { useSingleProductContext } from "@/context/SingleProductContext";
 import { UserService } from "@/services/UserService";
 import { Heart, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
@@ -11,19 +11,19 @@ import React, { useEffect, useState } from "react";
 interface ProductDetailComponentProps {
   show: boolean;
   onClose: () => void;
-  product: Producto;
 }
 
 const ProductDetailComponent: React.FC<ProductDetailComponentProps> = ({
   show,
   onClose,
-  product,
 }) => {
+  const {product}=useSingleProductContext();
   const { user } = useAuthContext();
   const [isInWishlist, setIsInWishlist] = useState(false);
 
   useEffect(() => {
     if (!user) return;
+    if (!product) return;
     const checkWishlist = async () => {
       const usuario = await UserService.getUser(user.uid);
       if (usuario && usuario.listaDeseos.includes(product.id)) {
@@ -33,11 +33,14 @@ const ProductDetailComponent: React.FC<ProductDetailComponentProps> = ({
       }
     };
     checkWishlist();
-  }, [user, product.id]);
+  }, [user, product]);
+  
+  if (!product) return ;
 
   const handleToggleWishList = async () => {
     try {
       if (!user) return ;
+      if (!product) return ;
       
       if (isInWishlist) {
         await UserService.removeProductFromWishlist(user.uid, product.id);
