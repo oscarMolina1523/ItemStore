@@ -3,16 +3,19 @@ import { ProductProvider } from '@/context/ProductContext';
 import router from '@/routes/Routes';
 import { RouterProvider } from 'react-router-dom';
 import './App.css';
+import { SingleProductProvider } from '@/context/SingleProductContext';
 
 function App() {
 
   return (
     <>
-      <ProductProvider>
-        <AuthProvider>
-          <RouterProvider router={router} />
-        </AuthProvider>
-      </ProductProvider>
+      <SingleProductProvider>
+        <ProductProvider>
+          <AuthProvider>
+            <RouterProvider router={router} />
+          </AuthProvider>
+        </ProductProvider>
+      </SingleProductProvider>
     </>
   )
 }
