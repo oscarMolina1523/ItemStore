@@ -12,3 +12,10 @@ export type ProductContextType = {
   errorProd?:string;
   refetchProducts:()=>Promise<void>;
 };
+
+export type SingleProductContextType = {
+  product: Producto |null | undefined ;
+  loadingProd: boolean;
+  errorProd?: string;
+  fetchSingleProduct: (productId: string) => Promise<void>;
+};

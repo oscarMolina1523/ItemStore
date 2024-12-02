@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Label } from "@/components/ui/label";
 import { useProductContext } from "@/context/ProductContext";
+import { useSingleProductContext } from "@/context/SingleProductContext";
 import { Producto } from "@/models/EntitiesModel";
 import ProductDetailComponent from "@/shared/ProductDetailComponent";
 import { Heart } from "lucide-react";
@@ -10,31 +11,20 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const HomeProductsComponent: React.FC = () => {
-  const {products} = useProductContext();
-  const [selectedProd, setSelectedProd] = useState<Producto | null>(null);
-  // const [products, setItems] = useState<Producto[]>([]);
+  const { fetchSingleProduct } = useSingleProductContext();
+  const { products } = useProductContext();
   const navigate = useNavigate();
 
-  const handleSelectedProduct = (product: Producto | null) => {
-    setSelectedProd(product); 
+  const [selectedProd, setSelectedProd] = useState<Producto | undefined>();
+
+  const handleSelectedProduct = (product?: Producto) => {
+    setSelectedProd(product);
+    if (product) fetchSingleProduct(product.id);
   };
-  
-  const handleRedirectProductList=()=>{
+
+  const handleRedirectProductList = () => {
     navigate("/productList");
   };
-
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     try {
-  //       const prod = await ProductService.getProducts();
-  //       setItems(prod);
-  //     } catch (error) {
-  //       console.log("Failed to obtain products", error);
-  //     }
-  //   };
-
-  //   fetchProducts();
-  // }, [setItems]);
 
 
   const sortedItems = [...products].sort((a, b) => {
@@ -73,7 +63,7 @@ const HomeProductsComponent: React.FC = () => {
                         </Badge>
                       ))}
                     </div> */}
-                    <br/>
+                    <br />
                     <div className="flex flex-row items-center justify-between">
                       <span className="text-[1.2rem] font-extrabold tracking-wide text-left">C${item.precio}</span>
                       <Heart className="h-6 w-6" />
@@ -85,11 +75,10 @@ const HomeProductsComponent: React.FC = () => {
           </CarouselContent>
         </Carousel>
       </div>
-      {selectedProd && ( 
+      {selectedProd && (
         <ProductDetailComponent
-          product={selectedProd}
           show={!!selectedProd}
-          onClose={() => handleSelectedProduct(null)} 
+          onClose={() => handleSelectedProduct(undefined)}
         />
       )}
     </div>
