@@ -81,7 +81,6 @@ const ProductListPage: React.FC = () => {
         </CommandList>
       </Command>
 
-      {/* Lista de productos */}
       <div className="flex flex-col w-full md:w-3/4 gap-4 mb-4 md:mt-4">
         <Label className="text-left text-dark-ocean-blue dark:text-surface-neutral font-semibold tracking-wide">
           Todos los productos
