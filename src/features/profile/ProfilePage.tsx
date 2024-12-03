@@ -1,16 +1,39 @@
 import CreateProductComponent from "@/components/itemStoreComponents/CreateProduct";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useAuthContext } from "@/context/AuthContext";
+import { Usuario } from "@/models/EntitiesModel";
+import { UserService } from "@/services/UserService";
 import { ArrowLeft } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import EditProfileComponent from "./EditProfile";
 
 const ProfilePage: React.FC = () => {
+  const { user } = useAuthContext();
+  const [data, setUser]=useState<Usuario | null>(null);
   const [newProduct, setNewProduct]= useState(false);
+  const [editProfile, setEditProfile]= useState(false);
+
+  useEffect(()=>{
+    const fetchUser=async()=>{
+      if(!user) return;
+      const usuario = await UserService.getUser(user.uid);
+      setUser(usuario);
+    }
+
+    fetchUser();
+  },[user]);
 
   const handleNewProductClick=()=>{
     setNewProduct(!newProduct);
   }
+
+  const handleEditProfileClick=()=>{
+    setEditProfile(!editProfile);
+  }
+
+  if(!data) return;
 
   return (
     <div className="flex flex-col items-center gap-4 px-4">
@@ -24,12 +47,12 @@ const ProfilePage: React.FC = () => {
         <div className="w-full flex flex-row gap-2 border-b-2">
           <div className="w-1/3 py-2 ">
             <img className="object-cover w-full h-full"
-              src="https://cdn2.psychologytoday.com/assets/styles/manual_crop_1_1_1200x1200/public/field_blog_entry_images/2018-09/shutterstock_648907024.jpg?itok=1-9sfjwH"
+              src={data.foto}
               alt="profile-img" />
           </div>
-          <div className="w-2/3 flex flex-col gap-2 items-start">
-            <Label className="text-[1.5rem] tracking-wide font-semibold text-black">Luka Marjanovic</Label>
-            <Button className="bg-gray border border-dark-gray text-dark-gray h-[3rem]">Editar cuenta</Button>
+          <div className="w-2/3 flex flex-col gap-2 items-start pb-2">
+            <Label className="text-[1.5rem] tracking-wide font-semibold text-black">{data.nombre}</Label>
+            <Button onClick={handleEditProfileClick} className="bg-gray border border-dark-gray text-dark-gray h-[3rem]">Editar cuenta</Button>
           </div>
         </div>
         <div className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start">
@@ -46,6 +69,7 @@ const ProfilePage: React.FC = () => {
         </div>
       </div>
       <CreateProductComponent show={newProduct} onClose={handleNewProductClick}/>
+      <EditProfileComponent show={editProfile} onClose={handleEditProfileClick}/>
     </div>
   );
 }
