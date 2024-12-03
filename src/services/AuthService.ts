@@ -36,8 +36,8 @@ export const AuthService = {
   async GetCurrentUser(): Promise<User | null> {
     return new Promise((resolve) => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
-        unsubscribe(); // Detenemos el listener tras obtener el estado actual
-        resolve(user); // Devolvemos el usuario autenticado o `null`
+        unsubscribe(); 
+        resolve(user);
       });
     });
   },
