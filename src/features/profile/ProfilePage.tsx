@@ -1,4 +1,3 @@
-import CreateProductComponent from "@/components/itemStoreComponents/CreateProduct";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useAuthContext } from "@/context/AuthContext";
@@ -13,7 +12,6 @@ import EditProfileComponent from "./EditProfile";
 const ProfilePage: React.FC = () => {
   const { user } = useAuthContext();
   const [data, setUser]=useState<Usuario | null>(null);
-  const [newProduct, setNewProduct]= useState(false);
   const [editProfile, setEditProfile]= useState(false);
 
   const navigate=useNavigate();
@@ -28,9 +26,6 @@ const ProfilePage: React.FC = () => {
     fetchUser();
   },[user]);
 
-  const handleNewProductClick=()=>{
-    setNewProduct(!newProduct);
-  }
 
   const handleEditProfileClick=()=>{
     setEditProfile(!editProfile);
@@ -66,14 +61,10 @@ const ProfilePage: React.FC = () => {
         <Link to="/manageProduct" className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start">
           <Label className="text-[1.2rem] tracking-wide font-semibold text-black">Administrar Productos</Label>
         </Link>
-        <div onClick={handleNewProductClick} className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start">
-          <Label className="text-[1.2rem] tracking-wide font-semibold text-black">Nuevo Producto</Label>
-        </div>
         <div onClick={handleLogout} className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start">
           <Label className="text-[1.2rem] tracking-wide font-semibold text-black">Cerrar Sesion</Label>
         </div>
       </div>
-      <CreateProductComponent show={newProduct} onClose={handleNewProductClick}/>
       <EditProfileComponent show={editProfile} onClose={handleEditProfileClick}/>
     </div>
   );
