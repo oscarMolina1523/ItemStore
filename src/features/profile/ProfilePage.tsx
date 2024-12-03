@@ -63,9 +63,9 @@ const ProfilePage: React.FC = () => {
             <Button onClick={handleEditProfileClick} className="bg-blue font-semibold tracking-wide border border-blue text-surface-neutral h-[3rem]">Editar cuenta</Button>
           </div>
         </div>
-        <div className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start">
+        <Link to="/manageProduct" className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start">
           <Label className="text-[1.2rem] tracking-wide font-semibold text-black">Administrar Productos</Label>
-        </div>
+        </Link>
         <div onClick={handleNewProductClick} className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start">
           <Label className="text-[1.2rem] tracking-wide font-semibold text-black">Nuevo Producto</Label>
         </div>
