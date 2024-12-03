@@ -47,7 +47,7 @@ const ProductDetailComponent: React.FC<ProductDetailComponentProps> = ({
       } else {
         await UserService.addProductToWishlist(user.uid, product.id);
       }
-      setIsInWishlist(!isInWishlist); // Cambiar el estado
+      setIsInWishlist(!isInWishlist);
     } catch (error) {
       console.error("Error al actualizar la lista de deseos:", error);
     }
