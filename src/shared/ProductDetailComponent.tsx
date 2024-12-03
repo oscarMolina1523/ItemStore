@@ -34,7 +34,7 @@ const ProductDetailComponent: React.FC<ProductDetailComponentProps> = ({
     };
     checkWishlist();
   }, [user, product]);
-  
+
   if (!product) return ;
 
   const handleToggleWishList = async () => {
@@ -44,12 +44,10 @@ const ProductDetailComponent: React.FC<ProductDetailComponentProps> = ({
       
       if (isInWishlist) {
         await UserService.removeProductFromWishlist(user.uid, product.id);
-        alert("Producto eliminado de la lista de deseos");
       } else {
         await UserService.addProductToWishlist(user.uid, product.id);
-        alert("Producto agregado a la lista de deseos");
       }
-      setIsInWishlist(!isInWishlist); // Cambiar el estado
+      setIsInWishlist(!isInWishlist);
     } catch (error) {
       console.error("Error al actualizar la lista de deseos:", error);
     }
