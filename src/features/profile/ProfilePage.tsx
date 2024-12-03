@@ -52,7 +52,7 @@ const ProfilePage: React.FC = () => {
           </div>
           <div className="w-2/3 flex flex-col gap-2 items-start pb-2">
             <Label className="text-[1.5rem] tracking-wide font-semibold text-black">{data.nombre}</Label>
-            <Button onClick={handleEditProfileClick} className="bg-gray border border-dark-gray text-dark-gray h-[3rem]">Editar cuenta</Button>
+            <Button onClick={handleEditProfileClick} className="bg-blue font-semibold tracking-wide border border-blue text-surface-neutral h-[3rem]">Editar cuenta</Button>
           </div>
         </div>
         <div className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start">
