@@ -8,11 +8,12 @@ import { Card, CardDescription } from "../ui/card";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
+import { useProductContext } from "@/context/ProductContext";
 
 interface EditProductComponentProps {
   show: boolean;
   onClose: () => void;
-  productToEdit: Producto; 
+  productToEdit: Producto;
 }
 
 const EditProductComponent: React.FC<EditProductComponentProps> = ({
@@ -20,7 +21,8 @@ const EditProductComponent: React.FC<EditProductComponentProps> = ({
   onClose,
   productToEdit,
 }) => {
-  const { uploadImage, error } = useImageUpload(); 
+  const { refetchProducts } = useProductContext();
+  const { uploadImage, error } = useImageUpload();
   const [titulo, setTitulo] = useState<string>(productToEdit.titulo);
   const [precio, setPrecio] = useState<string>(productToEdit.precio);
   const [descripcion, setDescripcion] = useState<string>(productToEdit.descripcion);
@@ -59,6 +61,7 @@ const EditProductComponent: React.FC<EditProductComponentProps> = ({
 
       await ProductService.updateProduct(updatedProduct.id, updatedProduct);
       alert("Producto actualizado exitosamente");
+      refetchProducts();
       onClose();
     } catch (error) {
       console.error("Error al actualizar el producto:", error);
