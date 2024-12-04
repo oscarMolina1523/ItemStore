@@ -7,7 +7,7 @@ const SplashPage: React.FC = () => {
     <div className="w-full flex flex-col h-screen bg-blue item-center">
       <div className="h-2/4 flex items-end justify-center">
         <img className="object-contain "
-          src="src\assets\splash.svg"
+          src="https://i.ibb.co/RQgcbfk/logo.png"
           alt="splash-img"
         />
       </div>
