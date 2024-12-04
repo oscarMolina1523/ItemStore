@@ -1,3 +1,4 @@
+import { useProductContext } from "@/context/ProductContext";
 import useImageUpload from "@/hooks/useImageUpload";
 import { Producto } from "@/models/EntitiesModel";
 import { ProductService } from "@/services/ProductService";
@@ -18,6 +19,7 @@ const CreateProductComponent: React.FC<CreateProductComponentProps> = ({
   show,
   onClose,
 }) => {
+  const {refetchProducts } = useProductContext();
   const { uploadImage, error } = useImageUpload(); 
   const [titulo, setTitulo] = useState<string>("");
   const [precio, setPrecio] = useState<string>("0");
@@ -55,6 +57,7 @@ const CreateProductComponent: React.FC<CreateProductComponentProps> = ({
       setDescripcion("");
       setImageFile(null);
       alert("Producto creado exitosamente");
+      refetchProducts();
       onClose();
     } catch (error) {
       console.error("Error al crear el producto:", error);
