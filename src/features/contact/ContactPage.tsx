@@ -12,6 +12,9 @@ const ContactPage: React.FC = () => {
           <Label className="text-[1.5rem] text-black font-semibold tracking-wide">Contactos</Label>
         </Link>
       </div>
+      <div className="w-full mt-[5rem]">
+        Aca estan los contactos y la info que pondre 
+      </div>
     </div>
   );
 }
