@@ -1,3 +1,4 @@
+import { HomePrincipalSkeleton } from "@/components/skeletons/HomePrincipalSkeleton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -12,9 +13,11 @@ import { Link } from "react-router-dom";
 const WishListPage: React.FC = () => {
   const { user } = useAuthContext();
   const [wishListProducts, setWishListProducts] = useState<Producto[]>([]);
+  const [loading, setLoading]=useState<boolean>(false);
 
 
   const fetchWishList = useCallback(async () => { 
+    setLoading(true);
     try {
       if (!user) return;
       const usuario: Usuario |null = await UserService.getUser(user.uid);
@@ -25,16 +28,17 @@ const WishListPage: React.FC = () => {
         );
   
         const products = await Promise.all(productsPromises);
-  
-        // Filtrar productos nulos (caso de IDs no válidos o productos inexistentes).
+
         const validProducts = products.filter(
           (product): product is Producto => product !== null
         );
   
         setWishListProducts(validProducts);
+        setLoading(false);
       }
     } catch (error) {
       console.error("Error al obtener la lista de deseos:", error);
+      setLoading(false);
     }
   }, [user]);
 
@@ -69,7 +73,13 @@ const WishListPage: React.FC = () => {
           </Button>
         </div>
         <div className="flex flex-col items-center gap-2 w-full mb-6">
-          {wishListProducts.length > 0 ? (
+          {loading ? (
+            <div className="flex flex-col gap-2">
+              <HomePrincipalSkeleton/>
+              <HomePrincipalSkeleton/>
+              <HomePrincipalSkeleton/>
+            </div>
+          ): wishListProducts.length > 0 ? (
             wishListProducts.map((item, index) => (
               <Card className="w-full" key={index}>
                 <CardContent className="p-1 flex flex-row">
