@@ -17,6 +17,12 @@ const ContactPage: React.FC = () => {
           <Label className="text-black font-semibold text-[1.5rem] tracking-wide">WhatsApp:</Label>
           <Label>+505 5720 7708</Label>
         </div>
+        <div className="h-[1px] w-full bg-black"></div>
+        <Label className="text-black font-semibold text-[1.5rem] tracking-wide">Redes Sociales:</Label>
+        <div className="flex flex-row gap-2 items-center ">
+          <Label className="text-black font-semibold text-[1.5rem] tracking-wide">Facebook:</Label>
+          <Label>@MoneyPlataYDemas</Label>
+        </div>
       </div>
     </div>
   );
