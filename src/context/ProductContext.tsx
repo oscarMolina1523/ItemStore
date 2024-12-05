@@ -1,13 +1,13 @@
 import { Producto } from "@/models/EntitiesModel";
+import { ProductService } from "@/services/ProductService";
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { ProductContextType } from "./TypesContext";
-import { ProductService } from "@/services/ProductService";
 
 const ProductContext = createContext<ProductContextType | undefined>(undefined); //contexto y typo de post 
 
 export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [products, setProduct] = useState<Producto[]>([]);
-  const [loadingProd, setLoading] = useState<boolean>(false);
+  const [loadingProd, setLoading] = useState<boolean>(true);
   const [errorProd, setError] = useState<string>();
 
   const refetchProducts = useCallback(async () => {
@@ -15,8 +15,9 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
     try {
       const allProducts = await ProductService.getProducts();
       setProduct(allProducts);
+      setError(undefined);
     } catch (error) {
-      setError("Error fetching products:" + error);
+      setError("Error fetching products: " + (error instanceof Error ? error.message : String(error)));
     } finally {
       setLoading(false);
     }

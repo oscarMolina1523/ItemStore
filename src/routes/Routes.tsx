@@ -8,7 +8,6 @@ import MainLayout from "@/features/layouts/MainLayout";
 import ManageProductsPage from "@/features/ManageProducts.tsx/ManageProducts";
 import ProductsListPage from "@/features/productsList/ProductsListPage";
 import ProfilePage from "@/features/profile/ProfilePage";
-import SearchPage from "@/features/search/SearchPage";
 import WishListPage from "@/features/wishList/WishListPage";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
@@ -36,10 +35,6 @@ const router = createBrowserRouter([
       {
         path: "/home",
         element: <HomePage />
-      },
-      {
-        path:"/search",
-        element: <SearchPage/>
       },
       {
         path:"/profile",
