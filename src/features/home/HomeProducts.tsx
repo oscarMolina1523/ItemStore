@@ -43,7 +43,7 @@ const HomeProductsComponent: React.FC = () => {
             {sortedItems.slice(0).map((item, index) => (
               <CarouselItem key={index} className="pl-1 basis-[11rem]">
                 <Card onClick={() => handleSelectedProduct(item)}>
-                  <CardContent className="flex flex-col flex-grow aspect-square p-1 flex-grow">
+                  <CardContent className="flex flex-col flex-grow aspect-square p-1">
                     <div className="w-full h-3/4 relative">
                       <img
                         className="object-cover h-full w-full rounded-md border border-dark-gray relative"

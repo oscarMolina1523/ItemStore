@@ -1,3 +1,4 @@
+import { HomePrincipalSkeleton } from "@/components/skeletons/HomePrincipalSkeleton";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -8,29 +9,13 @@ import {
 } from "@/components/ui/carousel";
 import { Label } from "@/components/ui/label";
 import { useProductContext } from "@/context/ProductContext";
-// import { Producto } from "@/models/EntitiesModel";
-// import { ProductService } from "@/services/ProductService";
 import { Search } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const HomePrincipalComponent: React.FC = () => {
-  const {products} = useProductContext();
+  const { products, loadingProd, errorProd } = useProductContext();
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const [products, setItems] = useState<Producto[]>([]);
-
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     try {
-  //       const prod = await ProductService.getProducts();
-  //       setItems(prod);
-  //     } catch (error) {
-  //       console.log("Failed to obtain products", error);
-  //     }
-  //   };
-
-  //   fetchProducts();
-  // }, [setItems]);
 
   const sortedItems = [...products].sort((a, b) => {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
@@ -41,23 +26,31 @@ const HomePrincipalComponent: React.FC = () => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % products.length);
     }, 3000);
 
-    return () => clearInterval(interval); // Limpieza para evitar fugas de memoria
+    return () => clearInterval(interval);
   }, [products.length]);
+
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [products]);
+
 
   return (
     <div className="flex flex-col items-center h-[20rem] w-full relative">
       <div className="w-full h-4/5 bg-blue rounded-b-[3rem]"></div>
       <div className="flex flex-col absolute items-center justify-center w-full gap-4 px-3 flex-grow translate-y-1/7 bottom-6">
-        <Link to="/search" className="w-full">
+        <Link to="/productList" className="w-full">
           <Button className="w-full h-[3rem] flex flex-row justify-start items-center bg-gray text-dark-gray">
             <Search />
             Search...
           </Button>
         </Link>
-        <div className="w-full">
+        <div className="w-full h-[8rem]">
           <Carousel className="bg-surface-neutral rounded-lg py-2 px-2 flex flex-col items-center shadow-lg">
             <CarouselContent className="w-full">
-              {sortedItems.slice(0).map((item, index) => (
+              {loadingProd ? (<HomePrincipalSkeleton/>):errorProd ? (<h1>Hubo un error intentelo de nuevo</h1>): products.length === 0 ? (
+                <h1>No hay productos disponibles</h1>
+              ) 
+              : sortedItems.slice(0).map((item, index) => (
                 <CarouselItem
                   key={index}
                   className={`flex flex-row w-full ${currentIndex === index ? "flex" : "hidden"}`}
@@ -78,7 +71,8 @@ const HomePrincipalComponent: React.FC = () => {
                     </Label>
                   </div>
                 </CarouselItem>
-              ))}
+              ))
+              }
             </CarouselContent>
             <div className="hidden justify-center gap-2 absolute bottom-0 translate-y-3/4 py-4">
               <CarouselPrevious
