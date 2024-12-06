@@ -7,6 +7,7 @@ import { useSingleProductContext } from "@/context/SingleProductContext";
 import { UserService } from "@/services/UserService";
 import { Heart, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import AlertAuthComponent from "./AlertAuthComponent";
 
 interface ProductDetailComponentProps {
   show: boolean;
@@ -17,13 +18,13 @@ const ProductDetailComponent: React.FC<ProductDetailComponentProps> = ({
   show,
   onClose,
 }) => {
-  const {product}=useSingleProductContext();
+  const { product } = useSingleProductContext();
   const { user } = useAuthContext();
   const [isInWishlist, setIsInWishlist] = useState(false);
+  const [notAuthenticated, setNotAuthenticated] = useState(false);
 
   useEffect(() => {
-    if (!user) return;
-    if (!product) return;
+    if (!user || !product) return;
     const checkWishlist = async () => {
       const usuario = await UserService.getUser(user.uid);
       if (usuario && usuario.listaDeseos.includes(product.id)) {
@@ -35,13 +36,16 @@ const ProductDetailComponent: React.FC<ProductDetailComponentProps> = ({
     checkWishlist();
   }, [user, product]);
 
-  if (!product) return ;
+  if (!product) return null;
 
   const handleToggleWishList = async () => {
     try {
-      if (!user) return ;
-      if (!product) return ;
-      
+      if (!user) {
+        setNotAuthenticated(true); // Mostrar alerta si no está autenticado
+        return;
+      }
+      if (!product) return;
+
       if (isInWishlist) {
         await UserService.removeProductFromWishlist(user.uid, product.id);
       } else {
@@ -111,6 +115,10 @@ const ProductDetailComponent: React.FC<ProductDetailComponentProps> = ({
                 : "Agregar a lista de deseos"}
             </Button>
           </div>
+          {/* Mostrar alerta si no está autenticado */}
+          {notAuthenticated && (
+            <AlertAuthComponent show={notAuthenticated} onClose={() => setNotAuthenticated(false)}/>
+          )}
         </CardContent>
       </Card>
     </div>

@@ -13,6 +13,11 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
+    path: "/",
+    index:true,
+    element: <Navigate to="/splash" replace />, 
+  },
+  {
     path: "splash",
     element: <SplashPage />
   },
@@ -29,7 +34,7 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        index: true, // Esta propiedad indica que esta es la ruta por defecto
+        index: true, 
         element: <Navigate to="/home" /> 
       },
       {

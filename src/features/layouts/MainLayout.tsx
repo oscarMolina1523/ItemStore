@@ -4,9 +4,11 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout: React.FC = () => {
   return (
-    <div className="flex flex-col items-center h-screen w-full">
-      <Outlet />
-      <FooterComponent/>
+    <div className="flex flex-col items-center min-h-screen w-full">
+      <div className="pb-[4rem] w-full">
+        <Outlet />
+      </div>
+      <FooterComponent />
     </div>
   );
 }
