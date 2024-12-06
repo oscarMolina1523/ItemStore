@@ -19,8 +19,8 @@ const CreateProductComponent: React.FC<CreateProductComponentProps> = ({
   show,
   onClose,
 }) => {
-  const {refetchProducts } = useProductContext();
-  const { uploadImage, error } = useImageUpload(); 
+  const { refetchProducts } = useProductContext();
+  const { uploadImage, error } = useImageUpload();
   const [titulo, setTitulo] = useState<string>("");
   const [precio, setPrecio] = useState<string>("0");
   const [descripcion, setDescripcion] = useState<string>("");
@@ -41,7 +41,7 @@ const CreateProductComponent: React.FC<CreateProductComponentProps> = ({
       }
 
       const newProduct: Producto = {
-        id:'',
+        id: '',
         titulo,
         categorias,
         precio,
@@ -78,16 +78,16 @@ const CreateProductComponent: React.FC<CreateProductComponentProps> = ({
   if (!show) return null;
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center overflow-y-auto bg-black bg-opacity-40 z-50">
-      <Card className="w-full md:w-1/2 mt-20 bg-black border border-most-dark-ocean-blue">
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center overflow-y-auto bg-black bg-opacity-40 z-50 transition-opacity duration-500 ease-[cubic-bezier(0.42, 0, 0.58, 1)]">
+      <Card className="w-full md:w-1/2 mt-20 bg-surface-neutral border">
         <CardDescription>
-          <div className="flex flex-row items-center justify-between px-4 py-4 border-b-2 border-surface-neutral text-surface-neutral">
-            <Label className="text-[1.2rem]">Nuevo Producto</Label>
+          <div className="flex flex-row items-center justify-between px-4 py-4 border-b-2 border-black text-black">
+            <Label className="text-[1.2rem] font-semibold tracking-wide">Nuevo Producto</Label>
             <X onClick={onClose} />
           </div>
         </CardDescription>
         <div className="flex flex-col px-4 py-4 gap-2">
-          <Label className="text-surface-neutral text-[1.2rem] tracking-wide text-opacity-75 text-left">
+          <Label className="text-black text-[1.2rem] tracking-wide text-opacity-75 text-left font-semibold">
             Título
           </Label>
           <Input
@@ -99,19 +99,19 @@ const CreateProductComponent: React.FC<CreateProductComponentProps> = ({
           />
         </div>
         <div className="flex flex-col px-4 py-4 gap-2">
-          <Label className="text-surface-neutral text-[1.2rem] tracking-wide text-opacity-75 text-left">
+          <Label className="text-black text-[1.2rem] tracking-wide text-opacity-75 text-left font-semibold">
             Precio
           </Label>
           <Input
             id="precio"
             className="bg-dark-ocean-blue border text-black"
-            placeholder="Precio del producto..."
+            placeholder="Precio del producto, solo ingresar numeros..."
             value={precio}
             onChange={(e) => setPrecio(e.target.value)}
           />
         </div>
         <div className="flex flex-col px-4 py-4 gap-2">
-          <Label className="text-left text-surface-neutral text-[1.2rem] tracking-wide text-opacity-75">
+          <Label className="text-left text-black text-[1.2rem] tracking-wide text-opacity-75 font-semibold">
             Categorías
           </Label>
           <Input
@@ -122,7 +122,7 @@ const CreateProductComponent: React.FC<CreateProductComponentProps> = ({
           />
         </div>
         <div className="flex flex-row px-4 py-4 gap-4">
-          <Label className="text-left text-surface-neutral text-[1.2rem] tracking-wide text-opacity-75">
+          <Label className="text-left text-black text-[1.2rem] tracking-wide text-opacity-75 font-semibold">
             Imagen
           </Label>
           <div className="flex items-center">
@@ -142,7 +142,7 @@ const CreateProductComponent: React.FC<CreateProductComponentProps> = ({
           </div>
         </div>
         <div className="flex flex-col px-4 py-4 gap-2">
-          <Label className="text-left text-surface-neutral text-[1.2rem] tracking-wide text-opacity-75">
+          <Label className="text-left text-black text-[1.2rem] tracking-wide text-opacity-75 font-semibold">
             Descripción
           </Label>
           <Textarea
