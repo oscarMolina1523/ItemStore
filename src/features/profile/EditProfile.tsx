@@ -79,11 +79,11 @@ const EditProfileComponent: React.FC<EditProfileComponentProps> = ({ show, onClo
   if (!show) return null;
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center overflow-y-auto bg-black bg-opacity-100 z-50 transition-opacity duration-500 ease-[cubic-bezier(0.42, 0, 0.58, 1)]">
-      <Card className="w-full md:w-1/2 mt-20 bg-most-dark-ocean-blue border">
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center overflow-y-auto bg-black bg-opacity-50 z-50 transition-opacity duration-500 ease-[cubic-bezier(0.42, 0, 0.58, 1)]">
+      <Card className="w-full md:w-1/2 mt-20 bg-surface-neutral border">
         <CardDescription>
-          <div className="flex flex-row items-center justify-between px-4 py-4 border-b text-surface-neutral">
-            <Label className="text-[1.2rem]">Editar Perfil</Label>
+          <div className="flex flex-row items-center justify-between px-4 py-4 border-b text-black">
+            <Label className="text-[1.2rem] font-semibold tracking-wide">Editar Perfil</Label>
             <X onClick={onClose} />
           </div>
         </CardDescription>
@@ -105,9 +105,9 @@ const EditProfileComponent: React.FC<EditProfileComponentProps> = ({ show, onClo
               {imageFile ? `File: ${imageFile.name}` : "Cargar imagen"}
             </Button>
           </div>
-          <div className="flex flex-col md:flex-row border-b-2 border-surface-neutral px-4 py-4 gap-2">
-            <div className="flex flex-col items-start w-full md:w-1/4 h-full text-surface-neutral">
-              <Label className="text-[1.2rem]">Nombre:</Label>
+          <div className="flex flex-col md:flex-row border-b-2 border-black px-4 py-4 gap-2">
+            <div className="flex flex-col items-start w-full md:w-1/4 h-full text-black">
+              <Label className="text-[1.2rem] font-semibold tracking-wide">Nombre:</Label>
             </div>
             <div className="overflow-hidden flex flex-col w-full md:w-3/4 items-start gap-2">
               <Input
@@ -115,14 +115,14 @@ const EditProfileComponent: React.FC<EditProfileComponentProps> = ({ show, onClo
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
-              <Label className="text-left text-surface-neutral text-opacity-75">
+              <Label className="text-left text-black text-opacity-75">
                 El nombre de usuario sólo puede contener letras, números, guiones bajos y puntos.
               </Label>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row border-b-2 border-surface-neutral px-4 py-4 gap-2">
-            <div className="flex flex-col items-start w-full md:w-1/4 h-full text-surface-neutral">
-              <Label className="text-[1.2rem]">Descripcion corta:</Label>
+          <div className="flex flex-col md:flex-row border-b-2 border-black px-4 py-4 gap-2">
+            <div className="flex flex-col items-start w-full md:w-1/4 h-full text-black">
+              <Label className="text-[1.2rem] font-semibold tracking-wide">Descripcion corta:</Label>
             </div>
             <div className="overflow-hidden flex flex-col w-full md:w-3/4 items-start gap-2">
               <Textarea
