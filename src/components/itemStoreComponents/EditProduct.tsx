@@ -1,3 +1,4 @@
+import { useProductContext } from "@/context/ProductContext";
 import useImageUpload from "@/hooks/useImageUpload";
 import { Producto } from "@/models/EntitiesModel";
 import { ProductService } from "@/services/ProductService";
@@ -8,7 +9,6 @@ import { Card, CardDescription } from "../ui/card";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
-import { useProductContext } from "@/context/ProductContext";
 
 interface EditProductComponentProps {
   show: boolean;
@@ -82,15 +82,15 @@ const EditProductComponent: React.FC<EditProductComponentProps> = ({
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center overflow-y-auto bg-black bg-opacity-40 z-50">
-      <Card className="w-full md:w-1/2 mt-20 bg-black border border-most-dark-ocean-blue">
+      <Card className="w-full md:w-1/2 mt-20 bg-surface-neutral border">
         <CardDescription>
-          <div className="flex flex-row items-center justify-between px-4 py-4 border-b-2 border-surface-neutral text-surface-neutral">
-            <Label className="text-[1.2rem]">Editar Producto</Label>
+          <div className="flex flex-row items-center justify-between px-4 py-4 border-b-2 border-black text-black">
+            <Label className="text-[1.2rem] font-semibold tracking-wide">Editar Producto</Label>
             <X onClick={onClose} />
           </div>
         </CardDescription>
         <div className="flex flex-col px-4 py-4 gap-2">
-          <Label className="text-surface-neutral text-[1.2rem] tracking-wide text-opacity-75 text-left">
+          <Label className="text-black text-[1.2rem] tracking-wide text-opacity-75 text-left font-semibold ">
             Título
           </Label>
           <Input
@@ -102,7 +102,7 @@ const EditProductComponent: React.FC<EditProductComponentProps> = ({
           />
         </div>
         <div className="flex flex-col px-4 py-4 gap-2">
-          <Label className="text-surface-neutral text-[1.2rem] tracking-wide text-opacity-75 text-left">
+          <Label className="text-black text-[1.2rem] tracking-wide text-opacity-75 text-left font-semibold ">
             Precio
           </Label>
           <Input
@@ -114,7 +114,7 @@ const EditProductComponent: React.FC<EditProductComponentProps> = ({
           />
         </div>
         <div className="flex flex-col px-4 py-4 gap-2">
-          <Label className="text-left text-surface-neutral text-[1.2rem] tracking-wide text-opacity-75">
+          <Label className="text-left text-black text-[1.2rem] tracking-wide text-opacity-75 font-semibold ">
             Categorías
           </Label>
           <Input
@@ -126,7 +126,7 @@ const EditProductComponent: React.FC<EditProductComponentProps> = ({
           />
         </div>
         <div className="flex flex-row px-4 py-4 gap-4">
-          <Label className="text-left text-surface-neutral text-[1.2rem] tracking-wide text-opacity-75">
+          <Label className="text-left text-black text-[1.2rem] tracking-wide text-opacity-75 font-semibold ">
             Imagen
           </Label>
           <div className="flex items-center">
@@ -146,7 +146,7 @@ const EditProductComponent: React.FC<EditProductComponentProps> = ({
           </div>
         </div>
         <div className="flex flex-col px-4 py-4 gap-2">
-          <Label className="text-left text-surface-neutral text-[1.2rem] tracking-wide text-opacity-75">
+          <Label className="text-left text-black text-[1.2rem] tracking-wide text-opacity-75 font-semibold ">
             Descripción
           </Label>
           <Textarea

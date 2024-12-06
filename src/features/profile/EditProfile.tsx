@@ -79,7 +79,7 @@ const EditProfileComponent: React.FC<EditProfileComponentProps> = ({ show, onClo
   if (!show) return null;
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center overflow-y-auto bg-black bg-opacity-50 z-50 transition-opacity duration-500 ease-[cubic-bezier(0.42, 0, 0.58, 1)]">
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center overflow-y-auto bg-black bg-opacity-90 z-50 transition-opacity duration-500 ease-[cubic-bezier(0.42, 0, 0.58, 1)]">
       <Card className="w-full md:w-1/2 mt-20 bg-surface-neutral border">
         <CardDescription>
           <div className="flex flex-row items-center justify-between px-4 py-4 border-b text-black">
