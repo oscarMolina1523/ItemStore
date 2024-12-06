@@ -64,9 +64,16 @@ const ProfilePage: React.FC = () => {
             </div>
           ):null}
         </div>
-        <Link to="/manageProduct" className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start">
-          <Label className="text-[1.2rem] tracking-wide font-semibold text-black">Administrar Productos</Label>
-        </Link>
+        {data.rol === "admin" && (
+          <Link
+            to="/manageProduct"
+            className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start"
+          >
+            <Label className="text-[1.2rem] tracking-wide font-semibold text-black">
+              Administrar Productos
+            </Label>
+          </Link>
+        )}
         <div onClick={handleLogout} className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start">
           <Label className="text-[1.2rem] tracking-wide font-semibold text-black">Cerrar Sesion</Label>
         </div>
