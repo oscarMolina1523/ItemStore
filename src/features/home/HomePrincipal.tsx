@@ -35,16 +35,16 @@ const HomePrincipalComponent: React.FC = () => {
 
 
   return (
-    <div className="flex flex-col items-center h-[20rem] w-full relative">
+    <div className="flex flex-col md:hidden items-center h-[20rem] md:h-[25rem] w-full relative">
       <div className="w-full h-4/5 bg-blue rounded-b-[3rem]"></div>
-      <div className="flex flex-col absolute items-center justify-center w-full gap-4 px-3 flex-grow translate-y-1/7 bottom-6">
-        <Link to="/productList" className="w-full">
+      <div className="flex flex-col absolute items-center justify-center w-full gap-4 px-3 flex-grow translate-y-1/7 bottom-6 ">
+        <Link to="/productList" className="w-full md:w-1/2">
           <Button className="w-full h-[3rem] flex flex-row justify-start items-center bg-gray text-dark-gray">
             <Search />
             Search...
           </Button>
         </Link>
-        <div className="w-full h-[8rem]">
+        <div className="w-full h-[8rem] md:h-[12rem] md:w-1/2">
           <Carousel className="bg-surface-neutral rounded-lg py-2 px-2 flex flex-col items-center shadow-lg">
             <CarouselContent className="w-full">
               {loadingProd ? (<HomePrincipalSkeleton/>):errorProd ? (<h1>Hubo un error intentelo de nuevo</h1>): products.length === 0 ? (
