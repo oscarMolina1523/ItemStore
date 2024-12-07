@@ -7,13 +7,14 @@ import { useProductContext } from "@/context/ProductContext";
 import { useSingleProductContext } from "@/context/SingleProductContext";
 import { Producto } from "@/models/EntitiesModel";
 import ProductDetailComponent from "@/shared/ProductDetailComponent";
-import { Heart } from "lucide-react";
+import { ArrowRight, Heart } from "lucide-react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const HomeProductsComponent: React.FC = () => {
   const { fetchSingleProduct } = useSingleProductContext();
   const { products, errorProd, loadingProd } = useProductContext();
+  const [visibleProd] = useState<number>(12);
   const navigate = useNavigate();
 
   const [selectedProd, setSelectedProd] = useState<Producto | undefined>();
@@ -33,18 +34,18 @@ const HomeProductsComponent: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col items-center bg-dark-gray rounded-t-[1rem] w-full flex-grow mt-8 gap-6">
+    <div className="flex flex-col items-center bg-dark-gray rounded-t-[1rem] w-full md:w-3/4 overflow-hidden flex-grow mt-8 gap-6">
       <div className="flex flex-row w-full items-center justify-between px-4 py-2">
         <Label className="text-black font-semibold text-[1.2rem]">Nuevos Productos</Label>
-        <Button onClick={handleRedirectProductList} className="bg-blue text-surface-neutral">Ver todo</Button>
+        <Button onClick={handleRedirectProductList} className="bg-blue text-surface-neutral">Ver todo<ArrowRight className="ml-2" /></Button>
       </div>
       <div className="px-2">
-        <Carousel className="w-full max-w-sm">
-          <CarouselContent className="ml-2 mb-4">
+        <Carousel className="w-full max-w-sm md:max-w-full">
+          <CarouselContent className="ml-2 mb-4 md:ml-8">
             {loadingProd ? (<CarouselProductSkeleton />) : errorProd ? (<h1>Hubo un error intentelo de nuevo</h1>) : products.length === 0 ? (
               <h1>No hay productos disponibles</h1>
             )
-              : sortedItems.slice(0).map((item, index) => (
+              : sortedItems.slice(0, visibleProd).map((item, index) => (
                 <CarouselItem key={index} className="pl-1 basis-[11rem]">
                   <Card onClick={() => handleSelectedProduct(item)}>
                     <CardContent className="flex flex-col flex-grow aspect-square p-1">
