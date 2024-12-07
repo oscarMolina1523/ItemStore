@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const HomePrincipalMobileComponent: React.FC = () => {
   return (
-    <div className="w-full md:w-3/4 h-[4rem] text-dark-ocean-blue bg-blue text-surface-neutral flex flex-row mb-6 fixed shadow-[0_4px_8px_rgba(0,0,0,0.2)] top-0 z-50 dark:bg-dark-ocean-blue">
+    <div className="hidden md:flex w-full md:w-3/4 h-[4rem] text-dark-ocean-blue bg-blue text-surface-neutral flex-row mb-6 fixed shadow-[0_4px_8px_rgba(0,0,0,0.2)] top-0 z-50 dark:bg-dark-ocean-blue">
       <div className="md:hidden w-1/3 flex flex-row items-center justify-start gap-1 px-2">
         <div className="flex flex-row">
           <div className="h-8 w-8 text-dark-ocean-blue dark:text-surface-neutral" />
