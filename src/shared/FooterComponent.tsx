@@ -38,7 +38,7 @@ const FooterComponent: React.FC = () => {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 w-full h-[4rem] flex items-center justify-around py-4 bg-surface-neutral z-10">
+    <div className="flex md:hidden fixed bottom-0 left-0 w-full h-[4rem]items-center justify-around py-4 bg-surface-neutral z-10">
       <div onClick={handleClickHome}>
         <House className="h-6 w-6" />
       </div>
