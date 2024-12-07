@@ -4,7 +4,7 @@ import React from "react";
 
 const HomeCategoriesComponent: React.FC = () => {
   return (
-    <div className="flex flex-row w-full items-center justify-center mt-4 gap-6">
+    <div className="flex flex-row w-full items-center justify-center mt-4 md:mt-[6rem] gap-6">
       <div className="flex flex-col gap-2">
         <Button className="bg-sky-blue h-[3rem]">
           <img src="https://i.ibb.co/FDLT3rc/men.png" alt="men-img"/>
