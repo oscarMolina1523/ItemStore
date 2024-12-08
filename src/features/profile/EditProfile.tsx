@@ -122,7 +122,7 @@ const EditProfileComponent: React.FC<EditProfileComponentProps> = ({ show, onClo
           </div>
           <div className="flex flex-col md:flex-row border-b-2 border-black px-4 py-4 gap-2">
             <div className="flex flex-col items-start w-full md:w-1/4 h-full text-black">
-              <Label className="text-[1.2rem] font-semibold tracking-wide">Descripcion corta:</Label>
+              <Label className="text-[1.2rem] font-semibold tracking-wide text-left">Descripcion corta:</Label>
             </div>
             <div className="overflow-hidden flex flex-col w-full md:w-3/4 items-start gap-2">
               <Textarea
