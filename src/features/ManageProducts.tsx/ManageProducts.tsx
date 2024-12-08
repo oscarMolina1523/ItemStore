@@ -16,7 +16,7 @@ import { Producto } from "@/models/EntitiesModel";
 import { ProductService } from "@/services/ProductService";
 import ProductDetailComponent from "@/shared/ProductDetailComponent";
 import ProductProfileComponent from "@/shared/ProductProfileComponent";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Plus } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -82,7 +82,7 @@ const ManageProductsPage: React.FC = () => {
 
   return (
     <div className="w-full flex flex-col gap-4 bg-surface-neutral dark:bg-dark-ocean-blue items-center px-2 py-6">
-      <div className="flex flex-col items-center w-full gap-4 ">
+      <div className="flex flex-col items-center w-full gap-4 md:hidden">
         <Link to="/profile" className="flex flex-row gap-4 items-center w-full fixed top-0 left-0 right-0 z-20 h-[4rem] bg-surface-neutral mb-6">
           <ArrowLeft className="h-8 w-8" />
           <Label className="text-[1.5rem] text-black font-semibold tracking-wide">Administrador de productos</Label>
@@ -90,7 +90,7 @@ const ManageProductsPage: React.FC = () => {
       </div>
       <CreateProductComponent show={newProduct} onClose={handleNewProductClick} />
       <div className="mt-[3rem]">
-        <Button onClick={handleNewProductClick} className="bg-blue font-semibold tracking-wide text-surface-neutral">Nuevo producto</Button>
+        <Button onClick={handleNewProductClick} className="bg-blue font-semibold tracking-wide text-surface-neutral"><Plus className="h-8 w-8"/>Nuevo producto</Button>
       </div>
       <Command className="rounded-lg border w-full md:w-3/4 bg-surface-neutral text-dark-ocean-blue dark:bg-dark-ocean-blue dark:text-surface-neutral">
         <CommandInput

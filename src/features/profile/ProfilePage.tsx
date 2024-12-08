@@ -53,14 +53,14 @@ const ProfilePage: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center gap-4 px-4">
-      <div className="flex flex-col items-center w-full gap-4 ">
+      <div className="flex flex-col items-center w-full gap-4 md:hidden ">
         <Link to="/home" className="flex flex-row gap-4 items-center w-full fixed top-0 left-0 right-0 z-20 h-[4rem] bg-surface-neutral mb-6">
           <ArrowLeft className="h-8 w-8" />
           <Label className="text-[1.5rem] text-black font-semibold tracking-wide">Mi Perfil</Label>
         </Link>
       </div>
       <div className="flex flex-col items-center mt-[5rem]">
-        <div className="w-full flex flex-row gap-2 border-b-2">
+        <div className="w-full md:w-3/4 flex flex-row gap-2 border-b-2">
           {loadingAuth ? (<HomePrincipalSkeleton />) : user ? (
             <div className="flex flex-row w-full gap-2">
               <div className="w-1/3 py-2">
@@ -78,14 +78,14 @@ const ProfilePage: React.FC = () => {
         {data.rol === "admin" && (
           <Link
             to="/manageProduct"
-            className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start"
+            className="h-[4rem] border-b-2 border-dark-gray w-full md:w-3/4 flex items-center justify-start"
           >
             <Label className="text-[1.2rem] tracking-wide font-semibold text-black">
               Administrar Productos
             </Label>
           </Link>
         )}
-        <div className="h-[4rem] border-b-2 border-dark-gray w-full flex items-center justify-start">
+        <div className="h-[4rem] border-b-2 border-dark-gray w-full md:w-3/4 flex items-center justify-start">
           <AlertDialog >
             <AlertDialogTrigger className="text-black flex flex-row gap-2 items-center tracking-wide bg-ligth-ocean-blue hover:bg-surface-neutral hover:font-semibold hover:border-ligth-ocean-blue hover:text-ligth-ocean-blue px-2 py-2 rounded-lg">
               <Label className="text-[1.2rem] tracking-wide font-semibold text-black">Cerrar Sesion</Label>
