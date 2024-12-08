@@ -82,7 +82,7 @@ const EditProductComponent: React.FC<EditProductComponentProps> = ({
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center overflow-y-auto bg-black bg-opacity-40 z-50">
-      <Card className="w-full md:w-1/2 mt-20 bg-surface-neutral border">
+      <Card className="w-full md:w-1/2 mt-40 bg-surface-neutral border">
         <CardDescription>
           <div className="flex flex-row items-center justify-between px-4 py-4 border-b-2 border-black text-black">
             <Label className="text-[1.2rem] font-semibold tracking-wide">Editar Producto</Label>
