@@ -57,14 +57,17 @@ const RegisterPage: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4 px-4 h-screen">
-      <div className="flex flex-col items-center w-full gap-4 ">
+    <div className="flex flex-col items-center gap-4 px-4 h-full mb-6">
+      <div className="flex flex-col items-center w-full gap-4 md:hidden">
         <Link to="/splash" className="flex flex-row gap-4 items-center w-full fixed top-0 left-0 right-0 z-20 h-[4rem] bg-surface-neutral mb-6">
           <ArrowLeft className="h-8 w-8" />
           <Label className="text-[1.5rem] text-black font-semibold tracking-wide">Registrarse</Label>
         </Link>
       </div>
-      <div className="flex flex-col gap-4 items-center w-full mt-[4rem]">
+      <div className="hidden md:flex flex-col items-center justify-center md:mt-[2rem] bg-blue h-[4rem] w-2/4">
+        <Label className="text-[1.5rem] text-surface-neutral font-semibold tracking-wide">Registrarse</Label>
+      </div>
+      <div className="flex flex-col gap-4 items-center w-full mt-[4rem] md:w-2/4">
         {error && (<Label className="text-red">Error al registrarse</Label>)}
         {failed && (<Label className="text-red">{failed}</Label>)}
         {exit && (<Label>Successful</Label>)}
