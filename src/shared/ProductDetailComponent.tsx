@@ -60,7 +60,7 @@ const ProductDetailComponent: React.FC<ProductDetailComponentProps> = ({
   if (!show) return null;
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center overflow-y-auto bg-black bg-opacity-40 z-50 transition-opacity duration-500 ease-[cubic-bezier(0.42, 0, 0.58, 1)]">
+    <div className="fixed inset-0 w-full h-full flex items-start justify-center overflow-y-auto bg-black bg-opacity-40 z-50 transition-opacity duration-500 ease-[cubic-bezier(0.42, 0, 0.58, 1)]">
       <Card className="w-full md:w-1/2 border mt-20">
         <CardDescription>
           <div className="flex flex-row items-center justify-between px-4 py-4 border-b-2 border-surface-neutral text-black">
