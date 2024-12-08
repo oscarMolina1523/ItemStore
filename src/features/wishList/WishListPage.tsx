@@ -1,7 +1,7 @@
-import { HomePrincipalSkeleton } from "@/components/skeletons/HomePrincipalSkeleton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useAuthContext } from "@/context/AuthContext";
 import { Producto, Usuario } from "@/models/EntitiesModel";
 import { ProductService } from "@/services/ProductService";
@@ -13,26 +13,26 @@ import { Link } from "react-router-dom";
 const WishListPage: React.FC = () => {
   const { user } = useAuthContext();
   const [wishListProducts, setWishListProducts] = useState<Producto[]>([]);
-  const [loading, setLoading]=useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
 
-  const fetchWishList = useCallback(async () => { 
+  const fetchWishList = useCallback(async () => {
     setLoading(true);
     try {
       if (!user) return;
-      const usuario: Usuario |null = await UserService.getUser(user.uid);
+      const usuario: Usuario | null = await UserService.getUser(user.uid);
 
       if (usuario && usuario.listaDeseos) {
         const productsPromises = usuario.listaDeseos.map((productId) =>
           ProductService.getProduct(productId)
         );
-  
+
         const products = await Promise.all(productsPromises);
 
         const validProducts = products.filter(
           (product): product is Producto => product !== null
         );
-  
+
         setWishListProducts(validProducts);
         setLoading(false);
       }
@@ -46,12 +46,12 @@ const WishListPage: React.FC = () => {
     fetchWishList();
   }, [user, fetchWishList]);
 
-  const handleRemoveProd=async(productId:string)=>{
-    try{
-      if(!user) return;
+  const handleRemoveProd = async (productId: string) => {
+    try {
+      if (!user) return;
       await UserService.removeProductFromWishlist(user.uid, productId);
       fetchWishList();
-    }catch{
+    } catch {
       console.log("error removing this product")
     }
   }
@@ -61,25 +61,35 @@ const WishListPage: React.FC = () => {
       <div className="flex flex-col items-center w-full gap-4 ">
         <Link
           to="/home"
-          className="flex flex-row gap-4 items-center w-full fixed top-0 left-0 right-0 z-20 h-[4rem] bg-surface-neutral mb-6"
+          className="flex md:hidden flex-row gap-4 items-center w-full fixed top-0 left-0 right-0 z-20 h-[4rem] bg-surface-neutral mb-6"
         >
           <ArrowLeft className="h-8 w-8" />
           <Label className="text-[1.5rem] text-black font-semibold tracking-wide">Lista de Deseos</Label>
         </Link>
-        <div className="w-full mt-[5rem]">
+        <div className="w-full md:w-3/4 mt-[5rem]">
           <Button className="w-full h-[3rem] flex flex-row justify-start border items-center bg-gray text-dark-gray">
             <Search />
             Search...
           </Button>
         </div>
-        <div className="flex flex-col items-center gap-2 w-full mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full md:w-3/4 mb-6">
           {loading ? (
-            <div className="flex flex-col gap-2">
-              <HomePrincipalSkeleton/>
-              <HomePrincipalSkeleton/>
-              <HomePrincipalSkeleton/>
-            </div>
-          ): wishListProducts.length > 0 ? (
+            [...Array(4)].map((_, i) => (
+              <div
+                key={i}
+                className="flex flex-row items-center gap-4 w-full h-[8rem] bg-surface-neutral"
+              >
+                <div className="w-3/5 h-full">
+                  <Skeleton className="h-full w-full bg-dark-gray" />
+                </div>
+                <div className="flex flex-col justify-between h-full w-2/5 gap-2">
+                  <Skeleton className="h-[1.2rem] w-full bg-dark-gray" />
+                  <Skeleton className="h-[1.5rem] w-full bg-dark-gray" />
+                  <Skeleton className="h-[3rem] w-full bg-dark-gray" />
+                </div>
+              </div>
+            ))
+          ) : wishListProducts.length > 0 ? (
             wishListProducts.map((item, index) => (
               <Card className="w-full" key={index}>
                 <CardContent className="p-1 flex flex-row">
@@ -104,7 +114,7 @@ const WishListPage: React.FC = () => {
                     </div> */}
                     <Label className="text-black font-extrabold text-[1.2rem]">C${item.precio}</Label>
                     <div className="w-full flex justify-end">
-                      <Trash  onClick={()=>handleRemoveProd(item.id)} className="h-6 w-6 text-red" />
+                      <Trash onClick={() => handleRemoveProd(item.id)} className="h-6 w-6 text-red" />
                     </div>
                   </div>
                 </CardContent>
