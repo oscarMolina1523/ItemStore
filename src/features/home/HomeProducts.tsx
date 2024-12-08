@@ -42,7 +42,11 @@ const HomeProductsComponent: React.FC = () => {
       <div className="px-2">
         <Carousel className="w-full max-w-sm md:max-w-full">
           <CarouselContent className="ml-2 mb-4 md:ml-8">
-            {loadingProd ? (<CarouselProductSkeleton />) : errorProd ? (<h1>Hubo un error intentelo de nuevo</h1>) : products.length === 0 ? (
+            {loadingProd ? ( [...Array(4)].map(() => (
+              <div className="flex flex-row ml-2 w-full h-full">
+                <CarouselProductSkeleton />
+              </div>
+            ))) : errorProd ? (<h1>Hubo un error intentelo de nuevo</h1>) : products.length === 0 ? (
               <h1>No hay productos disponibles</h1>
             )
               : sortedItems.slice(0, visibleProd).map((item, index) => (

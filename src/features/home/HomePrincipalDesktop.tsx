@@ -1,7 +1,40 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useAuthContext } from "@/context/AuthContext";
+import AlertAuthComponent from "@/shared/AlertAuthComponent";
+import React, { useState } from "react";
+import {useNavigate } from "react-router-dom";
 
 const HomePrincipalDesktopComponent: React.FC = () => {
+  const { user } = useAuthContext();
+  const [notAuthenticated, setNotAuthenticated] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const handleClickHome = () => {
+    navigate("/home");
+  }
+
+  const handleClickWishList = () => {
+    if (user) {
+      setNotAuthenticated(false);
+      navigate("/wishList");
+    }
+    else {
+      setNotAuthenticated(true);
+    }
+  }
+
+  const handleClickContact = () => {
+    navigate("/contact");
+  }
+
+  const handleClickProfile = () => {
+    if (user) {
+      setNotAuthenticated(false);
+      navigate("/profile");
+    }
+    else {
+      setNotAuthenticated(true);
+    }
+  }
   return (
     <div className="hidden md:flex w-full md:w-3/4 h-[4rem] text-dark-ocean-blue bg-blue text-surface-neutral flex-row mb-6 fixed shadow-[0_4px_8px_rgba(0,0,0,0.2)] top-0 z-50 dark:bg-dark-ocean-blue">
       <div className="md:hidden w-1/3 flex flex-row items-center justify-start gap-1 px-2">
@@ -21,13 +54,14 @@ const HomePrincipalDesktopComponent: React.FC = () => {
         </div>
       </div>
       <div className="hidden w-1/3 md:flex flex-row md:justify-between items-center">
-        <Link to="/home" className="hover:underline">Home</Link>
-        <Link to="/wishList" className="hover:underline">Lista Deseos</Link>
-        <Link to="/profile" className="hover:underline">Perfil</Link>
-        <Link to="/contact" className="hover:underline">Contacto</Link>
+        <div onClick={handleClickHome} className="hover:underline">Home</div>
+        <div onClick={handleClickWishList} className="hover:underline">Lista Deseos</div>
+        <div onClick={handleClickProfile} className="hover:underline">Perfil</div>
+        <div onClick={handleClickContact} className="hover:underline">Contacto</div>
       </div>
       <div className="flex w-1/3 flex-row items-center justify-end space-x-2 p-2">
       </div>
+      {notAuthenticated && (<AlertAuthComponent show={notAuthenticated} onClose={() => setNotAuthenticated(false)} />)}
     </div>
   );
 }
