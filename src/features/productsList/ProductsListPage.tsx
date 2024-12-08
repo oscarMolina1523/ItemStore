@@ -64,7 +64,7 @@ const ProductListPage: React.FC = () => {
 
   return (
     <div className="w-full flex flex-col gap-4 bg-surface-neutral dark:bg-dark-ocean-blue items-center px-2 py-6">
-      <div className="flex flex-col items-center w-full gap-4 ">
+      <div className="flex md:hidden flex-col items-center w-full gap-4">
         <Link to="/home" className="flex flex-row gap-4 items-center w-full fixed top-0 left-0 right-0 z-20 h-[4rem] bg-surface-neutral mb-6">
           <ArrowLeft className="h-8 w-8" />
           <Label className="text-[1.5rem] text-black font-semibold tracking-wide">Todos los productos</Label>
