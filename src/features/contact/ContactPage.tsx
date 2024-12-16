@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, Facebook } from "lucide-react";
+import { ArrowLeft, Facebook, Instagram } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -24,6 +24,17 @@ const ContactPage: React.FC = () => {
           <Button variant="outline" className="opacity-75 hover:opacity-100 bg-blue text-surface-neutral" onClick={() => window.open('https://www.facebook.com/isabel.argueta.7140')}>
             <Facebook className="h-4 w-4" />
             Facebook
+          </Button>
+        </div>
+        <div className="flex flex-row gap-2 items-center ">
+          <Button variant="outline" className="opacity-75 hover:opacity-100 bg-pink text-surface-neutral" onClick={() => window.open('https://www.instagram.com/isabel.marisa2811/profilecard/?igsh=MXFqaWJvdWYxNWZwNQ==')}>
+            <Instagram className="h-4 w-4" />
+            Instagram
+          </Button>
+        </div>
+        <div className="flex flex-row gap-2 items-center ">
+          <Button variant="outline" className="opacity-75 hover:opacity-100 bg-pink text-surface-neutral" onClick={() => window.open('https://www.instagram.com/isabel.marisa2811/profilecard/?igsh=MXFqaWJvdWYxNWZwNQ==')}>
+            TIK-TOK
           </Button>
         </div>
       </div>
