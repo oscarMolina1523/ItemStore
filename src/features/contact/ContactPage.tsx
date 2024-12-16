@@ -1,5 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Facebook } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -15,13 +16,15 @@ const ContactPage: React.FC = () => {
       <div className="w-full mt-[5rem] flex flex-col items-start justify-center h-full  md:w-3/4">
         <div className="flex flex-row gap-2 items-center ">
           <Label className="text-black font-semibold text-[1.5rem] tracking-wide">WhatsApp:</Label>
-          <Label>+505 5720 7708</Label>
+          <Label>+505 8452 9115</Label>
         </div>
         <div className="h-[1px] w-full bg-black"></div>
         <Label className="text-black font-semibold text-[1.5rem] tracking-wide">Redes Sociales:</Label>
         <div className="flex flex-row gap-2 items-center ">
-          <Label className="text-black font-semibold text-[1.5rem] tracking-wide">Facebook:</Label>
-          <Label>@MoneyPlataYDemas</Label>
+          <Button variant="outline" className="opacity-75 hover:opacity-100 bg-blue text-surface-neutral" onClick={() => window.open('https://www.facebook.com/isabel.argueta.7140')}>
+            <Facebook className="h-4 w-4" />
+            Facebook
+          </Button>
         </div>
       </div>
     </div>
