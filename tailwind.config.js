@@ -9,6 +9,7 @@ export default {
       'sky-blue':'#CFDBFD',
       'surface-neutral':'#FFFFFF',
       'black':'#3E4958',
+      'dark-black':'#111111f7',
       'gray':'#F7F8F9',
       'red':'#FF0000',
       'transparent':'#00000000',
