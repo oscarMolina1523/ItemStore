@@ -9,11 +9,13 @@ export default {
       'sky-blue':'#CFDBFD',
       'surface-neutral':'#FFFFFF',
       'black':'#3E4958',
+      'dark-black':'#111111f7',
       'gray':'#F7F8F9',
       'red':'#FF0000',
       'transparent':'#00000000',
       'dark-gray':'#D5DDE0',
       'green':'#00D455',
+      'pink':'#f52891cc',
     },
     fontFamily: {
       sans: ["Lato", "sans-serif"]
