@@ -14,6 +14,7 @@ export default {
       'transparent':'#00000000',
       'dark-gray':'#D5DDE0',
       'green':'#00D455',
+      'pink':'#f52891cc',
     },
     fontFamily: {
       sans: ["Lato", "sans-serif"]
