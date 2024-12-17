@@ -26,7 +26,7 @@ const ContactPage: React.FC = () => {
             Facebook
           </Button>
         </div>
-        <div className="flex flex-row gap-2 items-center ">
+        <div className="flex flex-row gap-2 items-center justify-center w-full">
           <Button variant="outline" className="opacity-75 hover:opacity-100 bg-pink text-surface-neutral" onClick={() => window.open('https://www.instagram.com/isabel.marisa2811/profilecard/?igsh=MXFqaWJvdWYxNWZwNQ==')}>
             <Instagram className="h-4 w-4" />
             Instagram
