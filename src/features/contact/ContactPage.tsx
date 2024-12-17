@@ -32,7 +32,7 @@ const ContactPage: React.FC = () => {
             Instagram
           </Button>
         </div>
-        <div className="flex flex-row gap-2 items-center ">
+        <div className="flex flex-row gap-2 items-center justify-center w-full">
           <Button variant="outline" className="opacity-95 hover:opacity-100 bg-dark-black text-surface-neutral" onClick={() => window.open('https://www.tiktok.com/@isabelargueta261?_t=8s6MC0jgR4X&_r=1')}>
             <Music className="h-4 w-4" />
             TIK-TOK
