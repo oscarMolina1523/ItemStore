@@ -20,7 +20,7 @@ const ContactPage: React.FC = () => {
         </div>
         <div className="h-[1px] w-full bg-black"></div>
         <Label className="text-black font-semibold text-[1.5rem] tracking-wide">Redes Sociales:</Label>
-        <div className="flex flex-row gap-2 items-center ">
+        <div className="flex flex-row gap-2 items-center justify-center w-full">
           <Button variant="outline" className="opacity-75 hover:opacity-100 bg-blue text-surface-neutral" onClick={() => window.open('https://www.facebook.com/isabel.argueta.7140')}>
             <Facebook className="h-4 w-4" />
             Facebook
