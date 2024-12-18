@@ -1,4 +1,5 @@
 import FooterComponent from "@/shared/FooterComponent";
+import FooterDesktopComponent from "@/shared/FooterDesktopComponent";
 import React from "react";
 import { Outlet } from "react-router-dom";
 import HomePrincipalDesktopComponent from "../home/HomePrincipalDesktop";
@@ -11,6 +12,7 @@ const MainLayout: React.FC = () => {
         <Outlet />
       </div>
       <FooterComponent />
+      <FooterDesktopComponent />
     </div>
   );
 }

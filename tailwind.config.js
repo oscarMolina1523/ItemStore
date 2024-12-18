@@ -14,6 +14,7 @@ export default {
       'red':'#FF0000',
       'transparent':'#00000000',
       'dark-gray':'#D5DDE0',
+      'dark-green':'#093809cc',
       'green':'#00D455',
       'pink':'#f52891cc',
     },
