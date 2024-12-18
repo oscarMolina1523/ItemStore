@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { ArrowLeft, Facebook, Instagram, Music } from "lucide-react";
@@ -13,10 +14,15 @@ const ContactPage: React.FC = () => {
           <Label className="text-[1.5rem] text-black font-semibold tracking-wide">Contactos</Label>
         </Link>
       </div>
-      <div className="w-full mt-[5rem] flex flex-col items-start justify-center h-full  md:w-3/4 gap-4">
+      <div className="w-full mt-[5rem] flex flex-col items-start justify-center h-full  md:w-2/4 gap-4">
         <div className="flex flex-row gap-2 items-center ">
-          <Label className="text-black font-semibold text-[1.5rem] tracking-wide">WhatsApp:</Label>
-          <Label>+505 8452 9115</Label>
+          <Label className="text-black font-semibold text-[1.5rem] tracking-wide">WhatsApp y número directo de llamada:</Label>
+        </div>
+        <div className="flex flex-row gap-2 items-center justify-center w-full">
+          <Badge className="px-2 bg-dark-green text-surface-neutral"
+          >
+            +505 8452 9115
+          </Badge>
         </div>
         <div className="h-[1px] w-full bg-black"></div>
         <Label className="text-black font-semibold text-[1.5rem] tracking-wide">Redes Sociales:</Label>
