@@ -24,7 +24,7 @@ const ProductComponent: React.FC<ProductComponentProps> = ({
           alt="post-image"
         />
       </div>
-      <div className="inline-flex gap-2 flex-wrap">
+      <div className="inline-flex gap-2 flex-wrap pl-2">
         {category.map((categoria, index) => (
           <Badge
             key={index}
@@ -34,7 +34,7 @@ const ProductComponent: React.FC<ProductComponentProps> = ({
           </Badge>
         ))}
       </div>
-      <Label className="text-ocean-blue dark:text-surface-neutral tracking-wide text-left font-semibold">{title}</Label>
+      <Label className="text-ocean-blue pl-2 dark:text-surface-neutral tracking-wide text-left font-semibold">{title}</Label>
     </div>
   );
 }

@@ -15,12 +15,12 @@ const SplashPage: React.FC = () => {
       </div>
       <div className="flex h-2/4 flex-col gap-2 items-center justify-center w-full px-4 md:w-2/4">
         <Link to="/login" className="w-full">
-          <Button className="h-[4rem] w-full hover:text-surface-neutral hover:bg-blue hover:border-surface-neutral tracking-wide text-[1.2rem] font-semibold text-blue bg-surface-neutral border border-blue">
+          <Button className="h-[4rem] w-full lg:w-1/2 hover:text-surface-neutral hover:bg-blue hover:border-surface-neutral tracking-wide text-[1.2rem] font-semibold text-blue bg-surface-neutral border border-blue">
             Iniciar Sesion
           </Button>
         </Link>
         <Link to="/register" className="w-full">
-          <Button className="h-[4rem] w-full hover:text-blue hover:bg-surface-neutral hover:border-blue  tracking-wide text-[1.2rem] font-semibold bg-blue text-surface-neutral">
+          <Button className="h-[4rem] w-full lg:w-1/2 hover:text-blue hover:bg-surface-neutral hover:border-blue  tracking-wide text-[1.2rem] font-semibold bg-blue text-surface-neutral">
             Registrarse
           </Button>
         </Link>
