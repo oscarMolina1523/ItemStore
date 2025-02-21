@@ -74,7 +74,7 @@ const HomeProductsComponent: React.FC = () => {
                     </div> */}
                       <br />
                       <div className="flex flex-row items-center justify-between">
-                        <span className="text-[1.2rem] font-extrabold tracking-wide text-left">C${item.precio}</span>
+                        <span className="text-[1.2rem] font-extrabold tracking-wide text-left">${item.precio}</span>
                         <Heart className="h-6 w-6" />
                       </div>
                     </CardContent>

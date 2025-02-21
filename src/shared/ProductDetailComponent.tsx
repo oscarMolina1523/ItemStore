@@ -88,7 +88,7 @@ const ProductDetailComponent: React.FC<ProductDetailComponentProps> = ({
               {product.descripcion}
             </p>
             <p>
-              <strong className="font-semibold tracking-wide">Precio: C$</strong>
+              <strong className="font-semibold tracking-wide">Precio: $</strong>
               {product.precio}
             </p>
           </div>
